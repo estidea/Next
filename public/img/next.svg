@@ -2,23 +2,23 @@
   <defs>
     <style>
       .hovered {
-        transform: translateY(-2px);
-        opacity:.1 !important;
-        transition: all .5s ease;
+        transform: translateY(-4px);
+        opacity:.2 !important;
+        transition: all .25s ease;
       }
       
       #mafia, #tennis, #koworking, #board, #birthday, #consoles, #barka, #vip, #kicker {
-        transition: all .5s ease;
+        transition: all .25s ease;
       }
 
       .hovered-item {
-        transform: translateY(-2px);
-        transition: all .5s ease;
+        transform: translateY(-4px);
+        transition: all .25s ease;
       }
 
       .unhovered {
         opacity:0 !important;
-        transition: all .5s ease;
+        transition: all .25s ease;
         transform: translateY(2px);
       }
       .cls-1 {

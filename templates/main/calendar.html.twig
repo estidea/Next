@@ -19,16 +19,17 @@
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
     
-    {# <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script> #}
+    <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale/ru.js') }}"></script>
     
     <script type="text/javascript">
         $(document).ready(function() {
             $('#calendar').fullCalendar({
+      
                 events: '/calendrierFeed',
                 defaultView: 'month',
-                selectable:true,
-                selectHelper:true,
-                editable:true
+                selectable:false,
+                selectHelper:false,
+                editable:false
             });
         });
     </script>

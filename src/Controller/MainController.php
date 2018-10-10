@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Offers;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-// use App\EventListener\FullCalendarListener;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MainController extends AbstractController
 {
@@ -33,12 +36,34 @@ class MainController extends AbstractController
 	        $e['id'] = $event->getId();
 	        $e['title'] = $event->getTitle();
 	        $e['start'] = $event->getBeginAt();
-	        $e['allDay'] = true;
+	        $e['end'] = $event->getEndAt();
+	        $e['allDay'] = false;
 
 	        array_push($calendrier, $e);
 	    }
 	    return $this->json($calendrier);
 	}
+
+    /**
+     * @Route("/getdescription", name="getdescription")
+     */
+    public function getdescription(Request $request)
+    {
+        if($request->request->get('project_id')){
+            $slug = $request->request->get('project_id');
+            $offer = $this->getDoctrine()->getRepository(Offers::class)->findOneBy(['slug' => $slug]);
+            $arrData = ['title' => $offer->getTitle(),
+                        'description' => $offer->getDescription(),
+                        'price' => $offer->getPrice(),
+                        'photo' => $offer->getPhoto()
+                        ];
+            return new JsonResponse($arrData);
+        }
+        
+        // redirects to the "main" route
+        return $this->redirectToRoute('home');
+    }
+
 
     /**
      * @Route("/calendar", name="calendar")

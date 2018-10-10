@@ -19,11 +19,11 @@
 			<div id="modal-right">
 				<div id="modal-info">
 					<div id="modal-close"><img src="{{ asset('img/close.svg') }}"></div>
-					<h3>Клуб Мафии</h3>
-					<p>Единственный в Черноморске официальный клуб мафии. Игры проводятся профессиональным ведущим</p>
+					<h3 id="modal-title">Клуб Мафии</h3>
+					<p id="modal-description">Единственный в Черноморске официальный клуб мафии. Игры проводятся профессиональным ведущим</p>
 				</div>
 				<div id="modal-action">
-					<div id="modal-price"><span>70 грн/вечер</span></div>
+					<div id="modal-price"><span>70 грн</span></div>
 					<div id="modal-btn">
 						<a href="#">Забронировать</a>
 					</div>
@@ -32,19 +32,24 @@
 		</div>
 	</div>
 	<div id="center">
-		<object id="main-svg" type="image/svg+xml" data="{{ asset('img/next.svg') }}">Your browser does not support SVGs</object>
+		<object id="main-svg" type="image/svg+xml" data="{{ asset('img/next-light8-areas-darker.svg') }}">Your browser does not support SVGs</object>
 	</div>
 	<div id="right-side">
 		<ul id="offers">
-			<li><a href="#">Клуб мафии</a></li>
-			<li><a href="#">Консоли</a></li>
-			<li><a href="#">Настольный теннис</a></li>
-			<li><a href="#">VIP-комната</a></li>
-			<li><a href="#">Коворкинг</a></li>
-			<li><a href="#">Настольные игры</a></li>
-			<li><a href="#">Дни рождения</a></li>
-			<li><a href="#">Кикер</a></li>
-			<li><a href="#">Чай, кофе, еда</a></li>
+			<li><a href="#" onmouseover="hoverList('mafia')" onmouseout="hideList('mafia')" onclick="showModal('mafia')">Клуб мафии</a></li>
+			<li><a href="#" onmouseover="hoverList('consoles')" onmouseout="hideList('consoles')" onclick="showModal('consoles')">Консоли</a></li>
+			<li><a href="#" onmouseover="hoverList('tennis')" onmouseout="hideList('tennis')" onclick="showModal('tennis')">Настольный теннис</a></li>
+			<li><a href="#" onmouseover="hoverList('vip')" onmouseout="hideList('vip')" onclick="showModal('vip')">VIP-комната</a></li>
+			<li><a href="#" onmouseover="hoverList('koworking')" onmouseout="hideList('koworking')" onclick="showModal('koworking')">Коворкинг</a></li>
+			<li><a href="#" onmouseover="hoverList('board')" onmouseout="hideList('board')" onclick="showModal('board')">Настольные игры</a></li>
+			<li><a href="#" onmouseover="hoverList('birthday')" onmouseout="hideList('birthday')" onclick="showModal('birthday')">Дни рождения</a></li>
+			<li><a href="#" onmouseover="hoverList('barka')" onmouseout="hideList('barka')" onclick="showModal('barka')">Чай, кофе, еда</a></li>
 		</ul>
 	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+	{{parent()}}
+   
 {% endblock %}

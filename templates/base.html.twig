@@ -12,7 +12,11 @@
         {% endblock %}
     </head>
     <body>
+        <div id="logo-bg">
+            <img src="{{ asset('img/bg-next.png') }}">
+        </div>
     	<div class="main-container">
+            
         	{% block body %}{% endblock %}
     	</div>
         {% block javascripts %}
