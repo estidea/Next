@@ -14,9 +14,14 @@ class OffersAdmin extends AbstractAdmin
     {
         $formMapper->add('title', TextType::class);
         $formMapper->add('description', TextType::class);
-        $formMapper->add('price', TextType::class);
+        $formMapper->add('price', TextType::class, array(
+            'required'   => false,
+        ));
         $formMapper->add('slug', TextType::class);
         $formMapper->add('photo', TextType::class);
+        $formMapper->add('additional', TextType::class, array(
+            'required'   => false,
+        ));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -26,6 +31,7 @@ class OffersAdmin extends AbstractAdmin
         $datagridMapper->add('price');
         $datagridMapper->add('slug');
         $datagridMapper->add('photo');
+        $datagridMapper->add('additional');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -35,5 +41,6 @@ class OffersAdmin extends AbstractAdmin
         $listMapper->addIdentifier('price');
         $listMapper->addIdentifier('slug');
         $listMapper->addIdentifier('photo');
+        $listMapper->addIdentifier('additional');
     }
 }

@@ -53,10 +53,11 @@ function showModal(id) {
 };
 
 function fireActive(svg, id) {
-	activeItem = svg.getElementById(id);
-	lightactive = svg.getElementById(id+'-light-active');
-	lightness = svg.getElementById(id+'-light');
-
+	var activeItem = svg.getElementById(id);
+	var lightactive = svg.getElementById(id+'-light-active');
+	var lightness = svg.getElementById(id+'-light');
+	// var itemInList = document.getElementById(id+'-offer');
+	// itemInList.classList.toggle("offers-hovered");
 	lightactive.classList.toggle("active");
 
 	activeItem.classList.add("hovered-item");
@@ -67,6 +68,8 @@ function shutActive(svg, id) {
 		var activeItem = svg.getElementById(id);
 		var lightactive = svg.getElementById(id+'-light-active');
 		var lightness = svg.getElementById(id+'-light');
+		// var itemInList = document.getElementById(id+'-offer');
+		// itemInList.classList.toggle("offers-hovered");
 		lightactive.classList.toggle("active");
 		activeItem.classList.remove("hovered-item");
 		lightness.classList.toggle("hovered");
@@ -90,7 +93,8 @@ function activeSvg(svg) { // clicks on the items on the svg
 				shutActive(svg, window.previous);
 
 				/* Add active to current element */
-				fireActive(svg, id)
+				fireActive(svg, id);
+				getDescription(id);
 
 				/* Add this element to the current (for the future) */
 				window.previous = id;
@@ -108,6 +112,7 @@ function lightHover(name, svg) {
 	var item = svg.getElementById(name);
 	var lightness = svg.getElementById(name+'-light');
 	var lightactive = svg.getElementById(name+'-light-active');
+	var itemInList = document.getElementById(name+'-offer');
 
 	lightness.classList.add("unhovered");
 	item.style.cursor = 'pointer';
@@ -116,6 +121,7 @@ function lightHover(name, svg) {
 	item.addEventListener("mouseenter", function() {
 		var active = lightactive.classList.contains('active');
 		if (active === false) {
+			itemInList.classList.toggle("offers-hovered");
 			item.classList.toggle("hovered-item");
 			lightness.classList.toggle("hovered");
 			lightness.classList.toggle("unhovered");
@@ -126,6 +132,7 @@ function lightHover(name, svg) {
 	item.addEventListener("mouseleave", function() {
 		var active = lightactive.classList.contains('active');
 		if (active === false) {
+			itemInList.classList.toggle("offers-hovered");
 			item.classList.toggle("hovered-item");
 			lightness.classList.toggle("hovered");
 			lightness.classList.toggle("unhovered");
@@ -139,15 +146,12 @@ window.addEventListener("load", function() {
 	for (var i=0;i<8;i++) {
 		lightHover(items[i], mainsvg);
 	}
-
-	var close = document.getElementById("modal-close");
-	close.addEventListener("click", function() {
-		document.getElementById("modal-card").style.opacity = 0;
-	});
 });
 
 function getDescription(id) {
-	var project_id = $(this).data('id');
+	if (id != window.previous) {
+		$("#modal-card").css('transform', 'translateX(-200%)');
+		var project_id = $(this).data('id');
     	that = $(this);
         $.ajax({
             url:'/getdescription',
@@ -162,52 +166,23 @@ function getDescription(id) {
             	$("#modal-title").html(data.title);
             	$("#modal-description").html(data.description);
             	$("#modal-price span").html(data.price);
-
-                // $('div#project-detail').css('z-index', '3');
-                // $('div#project-detail').css('opacity', '1');
-                // $('h3#project-title').html(data.title);
-                // $('span#project-name').html(data.name);
-                // $('p#project-description').html(data.description);
-                // $('#project-text').html(data.text);
+				$("#modal-card").css('transform', 'translateX(0%)');
             }
         });
     return false;
+	}
 }
 
-    
-
-// $(document).on('click', '#project-close', function(){
-//     $('div#project-detail').css('opacity', '0');
-//     setTimeout (function(){
-//     	$('div#project-detail').css('z-index', '-1');
-//     }, 200); 
-// });
-
-
-
-// function getDescription(slug) {
-// 	var slug = $(this).data('slug');
-//     var	that = $(this);
-//         $.ajax({
-//             url:'/getdescription',
-//             type: "GET",
-//             dataType: "json",
-//             data: {
-//                 "slug": slug
-//             },
-//             async: true,
-//             success: function (data)
-//             {
-//             	alert('aaa');
-//             	alert('Title = ',data.title, ' Desc = ', data.description, ' Price = ', data.price, ' Photo = ', data.photo);
-//             	// $("div#project-detail").scrollTop(0);
-//              //    $('div#project-detail').css('z-index', '3');
-//              //    $('div#project-detail').css('opacity', '1');
-//              //    $('h3#project-title').html(data.title);
-//              //    $('span#project-name').html(data.name);
-//              //    $('p#project-description').html(data.description);
-//              //    $('#project-text').html(data.text);
-//             }
-//         });
-//     return false;
-// }
+$(document).on('click', '#modal-close', function(){
+	var svg = document.getElementById('main-svg').contentDocument;
+	shutActive(svg, window.current);
+	var itemInList = document.getElementById(window.current+'-offer');
+	itemInList.classList.toggle("offers-hovered");
+    $('#modal-card').css('opacity', '0');
+    $("#modal-card").css('transform', 'translateX(-150%)');
+    window.current = '';
+    window.previous ='';
+    setTimeout (function(){
+    	$('#modal-card').css('opacity', '1');
+    }, 200); 
+});

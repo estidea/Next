@@ -43,6 +43,10 @@ body {
   overflow: hidden;
 }
 
+#mobile-menu {
+	display:none;
+}
+
 #logo-bg {
 	width: 90vw;
 	height: 100%;
@@ -100,14 +104,19 @@ body {
   z-index: 1;
 }
 
-#center {
+#desktop-center {
   display: flex;
   flex-grow: 1;
+}
+
+#mobile-center {
+  display: none;
 }
 
 #right-side {
   display: flex;
   margin-left: -60px;
+  flex: 0 0 137px;
 }
 
 #logo {
@@ -124,6 +133,8 @@ body {
   width: 35vw;
   position: absolute;
   max-width: 480px;
+  transform: translateX(-150%);
+  transition: transform .3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 #modal-left {
@@ -272,24 +283,176 @@ body {
 	border-color:#00B2CA;
 }
 
-/*ToDo remove svg style*/
-/*.hovered {
-        transform: translateY(-2px);
-        opacity:.1 !important;
-        transition: all .5s ease;
-      }
-      
-      #mafia, #tennis, #koworking, #board, #birthday, #consoles, #barka, #vip, #kicker {
-        transition: all .5s ease;
-      }
+.offers-hovered {
+  color: #00B2CA !important;
+  border-color:#00B2CA !important;
+}
 
-      .hovered-item {
-        transform: translateY(-2px);
-        transition: all .5s ease;
-      }
+/* Calendar-page */
 
-      .unhovered {
-        opacity:0 !important;
-        transition: all .5s ease;
-        transform: translateY(2px);
-      }*/
+.left-side-calendar {
+  margin-right:30px;
+}
+
+#calendar-manage {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.fc-state-default.fc-corner-left,.fc-corner-right {
+  background-color: #0000;
+  border: none;
+  color: white;
+  border-radius: 0;
+  background-image: unset;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0;
+}
+
+.fc-icon-left-single-arrow {
+  background: linear-gradient(90deg, #FFFFFF1A 33%, #FFF9 66%, #FFF);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #FFF;
+}
+
+.fc-state-hover .fc-icon-left-single-arrow {
+  background: linear-gradient(90deg, #FFF3 33%, #FFFFFFB3 66%, #FFF);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #FFF;
+}
+
+.fc-state-hover .fc-icon-right-single-arrow {
+  background: linear-gradient(270deg, #FFF3 33%, #FFFFFFB3 66%, #FFF);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #FFF;
+}
+
+.fc-icon-right-single-arrow {
+  background: linear-gradient(270deg, #FFFFFF1A 33%, #FFF9 66%, #FFF);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #FFF;
+}
+
+.fc-icon-left-single-arrow::before {
+  content: "\1f860";
+  font-weight: 400;
+  font-size: 75%;
+  top: 3px;
+  position: relative;
+  padding-right: 5px;
+}
+
+.fc-icon-left-single-arrow::after {
+  content: "";
+}
+
+.fc-icon-right-single-arrow::before {
+  content: "";
+}
+
+.fc-icon-right-single-arrow::after {
+  content: "\1f862";
+  font-weight: 400;
+  font-size: 75%;
+  top: 3px;
+  position: relative;
+  padding-left: 5px;
+}
+
+.fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.fc-icon {
+  height: auto;
+  line-height: auto;
+  font-size: 24px;
+  font-family: 'Akrobat Regular';
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  position: relative;
+  top: -10px;
+}
+
+.fc-state-hover {
+  cursor:pointer;
+}
+
+#calendar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.fc-left h2 {
+  font-family: 'Akrobat Regular';
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  font-size: 30px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+#calendar {
+  color: white;
+}
+
+.fc table {
+  border-collapse: separate;
+  border-spacing: 1px;
+}
+
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+  border-color: #ddd0;
+}
+
+.fc-widget-content {
+    border-style: solid;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.fc th, .fc-basic-view td.fc-week-number, .fc-icon, .fc-toolbar {
+    text-align: right;
+}
+
+.fc-other-month {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.fc-unthemed td.fc-today {
+    background: #0006;
+}
+
+.fc-title, .fc-time {
+  font-family: Ubuntu;
+}
+
+.fc-day-header span{
+  font-size: 18px;
+  padding-right: 2px;
+}
+
+.fc-day-grid-event .fc-content {
+  white-space: normal;
+}
+
+.fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
+  padding-right: 6px;
+}

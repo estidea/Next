@@ -41,6 +41,11 @@ class Offers
      */
     private $photo;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $additional;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Offers
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getAdditional(): ?string
+    {
+        return $this->additional;
+    }
+
+    public function setAdditional(?string $additional): self
+    {
+        $this->additional = $additional;
 
         return $this;
     }

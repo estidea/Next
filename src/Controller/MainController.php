@@ -16,8 +16,13 @@ class MainController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $offers = $em->getRepository(Offers::class)
+            ->findAll();
+
+        $calendrier = array();
         return $this->render('main/index.html.twig', [
-  
+            'offers' => $offers
         ]);
     }
 
@@ -38,6 +43,9 @@ class MainController extends AbstractController
 	        $e['start'] = $event->getBeginAt();
 	        $e['end'] = $event->getEndAt();
 	        $e['allDay'] = false;
+            $e['textColor'] = 'green';
+            $e['color'] = '#0000';
+            $e['description'] = 'ooueeee';
 
 	        array_push($calendrier, $e);
 	    }

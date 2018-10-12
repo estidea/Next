@@ -31,25 +31,40 @@
 			</div>
 		</div>
 	</div>
-	<div id="center">
+	<div id="desktop-center">
 		<object id="main-svg" type="image/svg+xml" data="{{ asset('img/next-light8-areas-darker.svg') }}">Your browser does not support SVGs</object>
+	</div>
+	<div id="mobile-center">
+		<div id="mobile-center-top">
+			<img id="mobile-center-image" src="{{ asset('img/mobile/mafia.svg') }}">
+		</div>
+		<div id="mobile-center-bottom">
+			<h3 id="mobile-title">Клуб Мафии</h3>
+			<p id="mobile-description">Единственный в Черноморске официальный клуб мафии. Игры проводятся профессиональным ведущим</p>
+			<div id="mobile-action">
+				<div id="mobile-price"><span>70 грн</span></div>
+				<div id="mobile-btn">
+					<a href="#">Забронировать</a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="right-side">
 		<ul id="offers">
-			<li><a href="#" onmouseover="hoverList('mafia')" onmouseout="hideList('mafia')" onclick="showModal('mafia')">Клуб мафии</a></li>
-			<li><a href="#" onmouseover="hoverList('consoles')" onmouseout="hideList('consoles')" onclick="showModal('consoles')">Консоли</a></li>
-			<li><a href="#" onmouseover="hoverList('tennis')" onmouseout="hideList('tennis')" onclick="showModal('tennis')">Настольный теннис</a></li>
-			<li><a href="#" onmouseover="hoverList('vip')" onmouseout="hideList('vip')" onclick="showModal('vip')">VIP-комната</a></li>
-			<li><a href="#" onmouseover="hoverList('koworking')" onmouseout="hideList('koworking')" onclick="showModal('koworking')">Коворкинг</a></li>
-			<li><a href="#" onmouseover="hoverList('board')" onmouseout="hideList('board')" onclick="showModal('board')">Настольные игры</a></li>
-			<li><a href="#" onmouseover="hoverList('birthday')" onmouseout="hideList('birthday')" onclick="showModal('birthday')">Дни рождения</a></li>
-			<li><a href="#" onmouseover="hoverList('barka')" onmouseout="hideList('barka')" onclick="showModal('barka')">Чай, кофе, еда</a></li>
+			{% for offer in offers %}
+				<li onmouseover="hoverList('{{offer.slug}}')" onmouseout="hideList('{{offer.slug}}')" onclick="showModal('{{offer.slug}}')"><a id="{{offer.slug}}-offer" href="#" >{{offer.title}}</a></li>
+		    {% endfor %}
 		</ul>
 	</div>
 {% endblock %}
 
 {% block javascripts %}
 	<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+	{% if is_mobile() %}
+        <script src="{{ asset('js/mobile-homepage.js') }}"></script>
+    {% else %}
+        <script src="{{ asset('js/homepage.js') }}"></script>
+    {% endif %}
 	{{parent()}}
    
 {% endblock %}

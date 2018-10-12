@@ -8,19 +8,28 @@
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-        	<link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+            {% if is_mobile() %}
+                <link href="{{ asset('css/mobile-style.css') }}" rel="stylesheet" />
+            {% else %}
+                <link href="{{ asset('css/desktop-style.css') }}" rel="stylesheet" />
+            {% endif %}
+        	
         {% endblock %}
     </head>
     <body>
+        <div id="mobile-menu">
+            <div id="mobile-menu-logo"><img src="{{ asset('img/logo-mobile.svg') }}"></div>
+            <div id="mobile-menu-touch"><img src="{{ asset('img/menu-icon.svg') }}"></div>
+        </div>
         <div id="logo-bg">
             <img src="{{ asset('img/bg-next.png') }}">
         </div>
+        
     	<div class="main-container">
-            
         	{% block body %}{% endblock %}
     	</div>
         {% block javascripts %}
-			<script src="{{ asset('js/homepage.js') }}"></script>
+            
         {% endblock %}
     </body>
 </html>
