@@ -43,7 +43,7 @@ class MainController extends AbstractController
 	        $e['start'] = $event->getBeginAt();
 	        $e['end'] = $event->getEndAt();
 	        $e['allDay'] = false;
-            $e['textColor'] = 'green';
+            $e['textColor'] = $event->getCategory()->getColor();
             $e['color'] = '#0000';
             $e['description'] = 'ooueeee';
 
