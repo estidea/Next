@@ -43,10 +43,6 @@ body {
   overflow: hidden;
 }
 
-#mobile-menu {
-	display:none;
-}
-
 #logo-bg {
 	width: 90vw;
 	height: 100%;
@@ -455,4 +451,8 @@ body {
 
 .fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
   padding-right: 6px;
+}
+
+.fc-day-grid-event {
+  background-color: #fff0 !important;
 }

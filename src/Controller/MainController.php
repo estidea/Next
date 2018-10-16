@@ -45,6 +45,7 @@ class MainController extends AbstractController
 	        $e['allDay'] = false;
             $e['textColor'] = $event->getCategory()->getColor();
             $e['color'] = '#0000';
+            $e['backgroundColor'] = $event->getCategory()->getColor();
             $e['description'] = 'ooueeee';
 
 	        array_push($calendrier, $e);
@@ -63,7 +64,8 @@ class MainController extends AbstractController
             $arrData = ['title' => $offer->getTitle(),
                         'description' => $offer->getDescription(),
                         'price' => $offer->getPrice(),
-                        'photo' => $offer->getPhoto()
+                        'photo' => $offer->getPhoto(),
+                        'slug' => $offer->getSlug()
                         ];
             return new JsonResponse($arrData);
         }

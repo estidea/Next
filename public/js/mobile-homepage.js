@@ -1,14 +1,19 @@
-var previous = '';
-var current ='';
+var previous = 'mafia';
+var current ='mafia';
 var items = ['mafia','tennis','koworking','board','birthday','consoles','barka','vip'];
 
 window.addEventListener("load", function() {
-
+    $('#mafia-offer').toggleClass('active');
 });
 
 function showModal(id) {
 	getDescription(id);
 	window.current = id;
+    var element = '#'+id+'-offer';
+    $(element).toggleClass('active');
+    var prev = '#'+window.previous+'-offer';
+    $(prev).toggleClass('active');
+    window.previous = id;
 };
 
 function getDescription(id) {
@@ -26,10 +31,10 @@ function getDescription(id) {
             async: true,
             success: function (data)
             {
-            	$("#modal-title").html(data.title);
-            	$("#modal-description").html(data.description);
-            	$("#modal-price span").html(data.price);
-				$("#modal-card").css('transform', 'translateX(0%)');
+                $("#mobile-center-image").attr("src","/img/mobile/"+data.slug+".svg");
+            	$("#mobile-title").html(data.title);
+            	$("#mobile-description").html(data.description);
+            	$("#mobile-price span").html(data.price);
             }
         });
     return false;

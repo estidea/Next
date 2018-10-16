@@ -35,35 +35,40 @@ a,p,span,h1,h2,h3,h4,h5,h6,li {
 body {
   margin: 0;
   display:flex;
+  background: url('../img/bg-mobile.jpg') center center;
+  background-size: cover;
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  background-color: #F0F0F0;
 }
 
-#mobile-menu {
+#left-side {
   width: 100%;
   height: 48px;
-  background-color: black;
+  background-color: #0000;
   position: absolute;
   top: 0;
   display: flex;
   justify-content: space-between;
 }
 
-#mobile-menu-logo {
+#static {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#logo {
   display: flex;
   align-items: center;
   padding-left: 18px;
+  width: 94px;
+  flex-grow: 0;
 }
 
-#mobile-menu-logo img {
+#logo img {
   height: 40%;
-}
-
-#mobile-menu-touch {
-  display: flex;
-  padding: 18px;
 }
 
 #logo-bg {
@@ -80,35 +85,27 @@ body {
 
 #menu {
   list-style-type: none;
-  padding: 0;
+  padding-right: 18px;
+  padding-left: 0;
 }
 
 .menu-item a {
   font-weight: 500;
-  line-height: 24px;
-  font-size: 24px;
+  line-height: 12px;
+  font-size: 12px;
   color: white;
-	padding-right: 1px;
+  padding: 12px;
 }
 
-.active a {
-  color: #00B2CA;
+.active a, .active{
+  color: #00B2CA !important;
 }
 
 .menu-item {
-  margin-bottom: 16px;
+  display: inline-block;
 }
 
 /* Home page */
-#left-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  opacity:0;
-}
 
 #center {
   display: flex;
@@ -117,10 +114,6 @@ body {
 
 #right-side {
   display: flex;
-}
-
-#logo {
-  display:none;
 }
 
 #modal-card {
@@ -135,7 +128,79 @@ body {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  padding: 42px;
+  padding: 18px;
+}
+
+#mobile-center-top {
+  padding: 24px;
+  max-height: 35vh;
+}
+
+#mobile-center-top img {
+  width: 100%;
+  height: 100%;
+}
+
+#mobile-center-bottom {
+  color: #FFFFFF;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#mobile-title {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 24px;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+#mobile-description {
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 16px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+#mobile-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1;
+}
+
+#mobile-price span{
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 24px;
+  font-size: 18px;
+}
+
+#mobile-btn {
+  width: 162px;
+  height: 42px;
+  background: linear-gradient(75.02deg, #1D8989 2.89%, #14999C 100%);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+/*  bottom: -4px;
+  right: 17px;*/
+}
+
+#mobile-btn:active {
+  background: linear-gradient(75.02deg, #00CCDB 2.89%, #00B6BA 100%);
+}
+
+#mobile-btn a{
+  font-weight: 600;
+  line-height: 24px;
+  font-size: 18px;
+  color: #FFFFFF;
 }
 
 #offers {
@@ -168,3 +233,53 @@ body {
   text-align: center;
 }
 
+
+/* Calendar Page */
+
+#calendar-manage {
+  display:none;
+}
+
+#mobile-calendar {
+  color: white;
+}
+
+.fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
+  background: #eee0;
+}
+
+.fc-list-item:hover {
+  background: #eee0;
+}
+
+.fc-unthemed .fc-list-item:hover td {
+  background-color: #eee0;
+}
+
+.fc-unthemed .fc-list-item td {
+  background-color: #0000;
+}
+
+.fc-list-view {
+  border-width: 0;
+}
+
+.fc-list-item-title a {
+  font-family: Ubuntu;
+}
+
+.fc-ltr .fc-list-heading-main {
+  font-family: Ubuntu;
+}
+
+.fc-ltr .fc-list-heading-alt, .fc-rtl .fc-list-heading-main {
+  font-family: Ubuntu;
+}
+
+.fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
+  padding-top: 20px;
+}
+
+.fc-list-item-time {
+  font-family: Ubuntu;
+}

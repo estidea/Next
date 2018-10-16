@@ -5,10 +5,17 @@
 {% block body %}
 	<div id="left-side">
 		<div id="static">
-			<img id="logo" src="{{ asset('img/logo.png') }}">
+			{% if is_mobile() %}
+			<div id="logo">
+                <img src="{{ asset('img/logo-mobile.svg') }}">
+            </div>
+            {% else %}
+                <img id="logo" src="{{ asset('img/logo.png') }}">
+            {% endif %}
+			
 			<ul id="menu">
 				<li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Главная</a></li>
-				<li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь событий</a></li>
+				<li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
 				<li class="menu-item {{ app.request.get('_route') == 'booking' ? 'active' }}"><a href="{{ path('booking') }}">Бронирование</a></li>
 			</ul>
 		</div>
