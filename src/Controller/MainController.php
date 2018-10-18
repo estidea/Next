@@ -34,6 +34,7 @@ class MainController extends AbstractController
 	    $em = $this->getDoctrine()->getManager();
 	    $events = $em->getRepository('App\Entity\Events')
 	        ->findAll();
+
 	    $calendrier = array();
 
 	    foreach ($events as $event) {
@@ -86,11 +87,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/booking", name="booking")
+     * @Route("/contacts", name="contacts")
      */
-    public function booking()
+    public function contacts()
     {
-        return $this->render('main/index.html.twig', [
+        return $this->render('main/contacts.html.twig', [
   
         ]);
     }

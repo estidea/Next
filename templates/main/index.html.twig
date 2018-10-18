@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Главная{% endblock %}
+{% block title %}Бронирование{% endblock %}
 
 {% block body %}
 	<div id="left-side">
@@ -14,9 +14,8 @@
             {% endif %}
 			
 			<ul id="menu">
-				<li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Главная</a></li>
+				<li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
 				<li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
-				<li class="menu-item {{ app.request.get('_route') == 'booking' ? 'active' }}"><a href="{{ path('booking') }}">Бронирование</a></li>
 			</ul>
 		</div>
 		<div id="modal-card">
@@ -25,12 +24,12 @@
 			</div>
 			<div id="modal-right">
 				<div id="modal-info">
-					<div id="modal-close"><img src="{{ asset('img/close.svg') }}"></div>
-					<h3 id="modal-title">Клуб Мафии</h3>
-					<p id="modal-description">Единственный в Черноморске официальный клуб мафии. Игры проводятся профессиональным ведущим</p>
+					<div class="modal-close" id="modal-close"><img src="{{ asset('img/close.svg') }}"></div>
+					<h3 id="modal-title"></h3>
+					<p id="modal-description"></p>
 				</div>
 				<div id="modal-action">
-					<div id="modal-price"><span>70 грн</span></div>
+					<div id="modal-price"><span></span></div>
 					<div id="modal-btn">
 						<a href="#">Забронировать</a>
 					</div>
@@ -66,12 +65,12 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+	{{parent()}}
 	{% if is_mobile() %}
         <script src="{{ asset('js/mobile-homepage.js') }}"></script>
     {% else %}
         <script src="{{ asset('js/homepage.js') }}"></script>
     {% endif %}
-	{{parent()}}
+	
    
 {% endblock %}

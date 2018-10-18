@@ -1,10 +1,3 @@
-{% extends 'base.html.twig' %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
-    {{parent()}}
-{% endblock %}
-
 {% block title %}Календарь{% endblock %}
 
 {% block body %}
@@ -18,9 +11,8 @@
             <img id="logo" src="{{ asset('img/logo.png') }}">
         {% endif %}
         <ul id="menu">
-            <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Главная</a></li>
+            <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
             <li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
-            <li class="menu-item {{ app.request.get('_route') == 'booking' ? 'active' }}"><a href="{{ path('booking') }}">Бронирование</a></li>
         </ul>
 
         <div id="calendar-manage">
@@ -29,6 +21,25 @@
                 <div id="calendar-date"></div>
             </div>
             <div id="calendar-right"></div>
+        </div>
+
+        <div id="modal-card">
+            <div id="modal-left">
+                <div id="modal-photo"></div>
+            </div>
+            <div id="modal-right">
+                <div id="modal-info">
+                    <div id="modal-close"><img src="{{ asset('img/close.svg') }}"></div>
+                    <h3 id="modal-title">Клуб Мафии</h3>
+                    <p id="modal-description">Единственный в Черноморске официальный клуб мафии. Игры проводятся профессиональным ведущим</p>
+                </div>
+                <div id="modal-action">
+                    <div id="modal-price"><span>70 грн</span></div>
+                    <div id="modal-btn">
+                        <a href="#">Забронировать</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

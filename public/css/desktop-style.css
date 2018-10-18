@@ -26,7 +26,7 @@ a {
 }
 
 a,p,span,h1,h2,h3,h4,h5,h6,li {
-  font-family: Akrobat ExtraLight;
+  font-family: Ubuntu;
   font-style: normal;
   line-height: 1.3;
   font-size: 12px;
@@ -76,6 +76,7 @@ body {
   font-size: 24px;
   color: white;
 	padding-right: 1px;
+  font-family: 'Akrobat ExtraLight';
 }
 
 .menu-item a:hover {
@@ -145,7 +146,7 @@ body {
   justify-content: space-between;
 }
 
-#modal-close {
+.modal-close {
     position: absolute;
     top: 18px;
     right: 18px;
@@ -153,7 +154,7 @@ body {
     opacity: 1;
 }
 
-#modal-close:hover {
+.modal-close:hover {
     opacity: .7;
 }
 
@@ -271,7 +272,8 @@ body {
   line-height: 1.3;
   text-decoration: none;
   border-bottom: 1px dashed grey;
-  padding-bottom: 3px.
+  padding-bottom: 3px;
+  font-family:'Akrobat ExtraLight';
 }
 
 #offers li a:hover {

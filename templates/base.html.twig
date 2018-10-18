@@ -13,7 +13,12 @@
             {% else %}
                 <link href="{{ asset('css/desktop-style.css') }}" rel="stylesheet" />
             {% endif %}
-        	
+        
+        <link href="{{ asset('bundles/uikit/css/uikit.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/uikit/css/components/datepicker.almost-flat.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/uikit/css/components/autocomplete.almost-flat.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/uikit/css/components/form-select.almost-flat.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/form-style.css') }}" rel="stylesheet" />  
         {% endblock %}
     </head>
     <body>
@@ -24,8 +29,85 @@
     	<div class="main-container">
         	{% block body %}{% endblock %}
     	</div>
+
+        <div id="modal-form-wrapper">
+            <div id="modal-form">
+                <div class="modal-close" id="modal-form-close">
+                    <img src="{{ asset('img/close.svg') }}">
+                </div>
+                <div id="form-title">Форма бронирования</div>
+                <div id="form-body">
+
+                    <form id="booking" class="uk-form">
+
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="name">Имя</label>
+                                <input id="name" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Что бронируем</label>
+                                <div data-uk-form-select class="uk-button uk-form-select" >
+                                    <span>Выберите бронь</span>
+                                    <select>
+                                        <option value="">Мафия</option>
+                                        <option value="">Теннис</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="number">Количество человек</label>
+                                <input id="number" type="number" required>
+                                
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="begin">Дата бронирования</label>
+                                <input data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="date" required />
+                                
+                            </div>
+                            <div class="form-group form-time">
+                                <label for="begin">Начало</label>
+                                <input data-uk-timepicker type="text" id="begin" required />
+                                
+                            </div>
+                            <div class="form-group form-time">
+                                <label for="end">Конец</label>
+                                <input type="text" id="end" required/ data-uk-timepicker>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Телефон*</label>
+                                <input id="name" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-wide">
+                            <label for="message">Комментарий к заказу (не обязательно)</label>
+                            <textarea id="message" type="textarea" rows="1" placeholder=""></textarea>
+                            
+                        </div>
+                        <div class="form-wide form-action">
+                            <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
+                            <div class="form-btn">
+                                <div id="modal-btn">
+                                    <a href="#">Отправить</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         {% block javascripts %}
-            
+            <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/uikit/js/uikit.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/autocomplete.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/form-select.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/datepicker.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/timepicker.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/form.js') }}"></script>
         {% endblock %}
     </body>
 </html>

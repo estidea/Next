@@ -1,0 +1,80 @@
+#modal-form-wrapper {
+	position:absolute;
+	top:0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	background-color:rgba(0, 0, 0, 0.6);
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	font-style: Ubuntu;
+}
+
+#modal-form {
+	background-color:#FDFFFC;
+	min-height: 517px;
+	border-right: solid #279B9B 6px;
+	position: relative;
+	padding: 72px;
+}
+
+#form-title {
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 24px;
+	font-size: 30px;
+}
+
+.form-group {
+  position: relative;
+  margin: 24px 0;
+  width: 100%;
+}
+
+.form-column {
+	width:40%;
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: space-between;
+}
+
+.form-time {
+	width: 42%;
+}
+
+.form-wide {
+    width: 100%;
+}
+
+.form-action {
+	display: flex;
+}
+
+.form-detail {
+	flex:1;
+}
+
+#booking {
+	display: flex;
+	flex-wrap: wrap;
+	width:516px;
+	justify-content: space-between;
+	font-family: ubuntu;
+}
+
+/* UiKit customization */
+.uk-dropdown {
+    background: #fff;
+    color: #444;
+}
+
+.uk-dropdown, .uk-dropdown-blank {
+    width: auto;
+}
+
+.uk-button {
+    width: 100%;
+    text-align: left;
+}
