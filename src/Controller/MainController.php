@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Offers;
+use App\Entity\Category;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,13 +28,25 @@ class MainController extends AbstractController
     }
 
 	/**
-	 * @Route("/calendrierFeed", name="calendrierFeed", methods={"GET"})
+	 * @Route("/calendrierFeed/", name="calendrierFeed", methods={"GET"})
 	 */
-	public function feedAction()
+	public function feedAction(Request $request)
 	{
 	    $em = $this->getDoctrine()->getManager();
-	    $events = $em->getRepository('App\Entity\Events')
-	        ->findAll();
+        $category = $request->query->get('category');
+        if ($category == '') {
+            $events = $em->getRepository('App\Entity\Events')
+            ->findAll();
+        } else {
+            $category_entity = $this->getDoctrine()
+                ->getRepository(Category::class)
+                ->findOneBy(
+                    ['title' => $category]
+                );
+
+            $events = $category_entity->getEvents();
+        }
+	    
 
 	    $calendrier = array();
 
@@ -47,7 +60,7 @@ class MainController extends AbstractController
             $e['textColor'] = $event->getCategory()->getColor();
             $e['color'] = '#0000';
             $e['backgroundColor'] = $event->getCategory()->getColor();
-            $e['description'] = 'ooueeee';
+            $e['description'] = $category;
 
 	        array_push($calendrier, $e);
 	    }

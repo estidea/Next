@@ -1,7 +1,14 @@
 function runCaledar() {
 	var height = $('#desktop-center').height();
 	$('#calendar').fullCalendar({
-	    events: '/calendrierFeed',
+	    events: {
+	    	url: '/calendrierFeed',
+	    	data: function () { // a function that returns an object
+                return {
+                    category: '',
+                };
+            },
+        },
 	    defaultView: 'month',
 	    selectable:false,
 	    selectHelper:false,
@@ -10,7 +17,7 @@ function runCaledar() {
 	    contentHeight: height,
 	    eventMouseover: function( event, jsEvent, view ) {
 	    	console.log(event.description);
-	    	console.log(view);
+	    	console.log(event);
 	    }
 	});
 }
