@@ -8,17 +8,16 @@
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {% if is_mobile() %}
-                <link href="{{ asset('css/mobile-style.css') }}" rel="stylesheet" />
-            {% else %}
-                <link href="{{ asset('css/desktop-style.css') }}" rel="stylesheet" />
-            {% endif %}
-        
         <link href="{{ asset('bundles/uikit/css/uikit.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/uikit/css/components/datepicker.almost-flat.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/uikit/css/components/autocomplete.almost-flat.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('bundles/uikit/css/components/form-select.almost-flat.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/form-style.css') }}" rel="stylesheet" />  
+        {% if is_mobile() %}
+            <link href="{{ asset('css/mobile-style.css') }}" rel="stylesheet" />
+        {% else %}
+            <link href="{{ asset('css/desktop-style.css') }}" rel="stylesheet" />
+        {% endif %}
         {% endblock %}
     </head>
     <body>
@@ -43,57 +42,56 @@
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="name">Имя</label>
-                                <input id="name" type="text" required>
+                                <input name="form-name" id="form-name" type="text" required>
                             </div>
                             <div class="form-group">
-                                <label for="name">Что бронируем</label>
-                                <div data-uk-form-select class="uk-button uk-form-select" >
-                                    <span>Выберите бронь</span>
-                                    <select>
-                                        <option value="">Мафия</option>
-                                        <option value="">Теннис</option>
+                                <label for="form-offer">Что бронируем</label>
+                                    <select name="form-offer" id="form-offer">
+                                        <option value="tennis">Настольный теннис</option>
+                                        <option value="board">Настольную игру</option>
+                                        <option value="consoles">Консоль</option>
+                                        <option value="vip">VIP-комнату</option>
+                                        <option value="another">Другое (в комментарии)</option>
                                     </select>
-                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="number">Количество человек</label>
-                                <input id="number" type="number" required>
-                                
+                                <input name="form-number" id="form-number" type="number" min="1" value="1" required>
                             </div>
                         </div>
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="begin">Дата бронирования</label>
-                                <input data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="date" required />
+                                <input name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
                                 
                             </div>
                             <div class="form-group form-time">
                                 <label for="begin">Начало</label>
-                                <input data-uk-timepicker type="text" id="begin" required />
+                                <input name="form-begin" data-uk-timepicker="start:11" type="text" id="form-begin" required value="11:00" />
                                 
                             </div>
                             <div class="form-group form-time">
                                 <label for="end">Конец</label>
-                                <input type="text" id="end" required/ data-uk-timepicker>
+                                <input name="form-end" data-uk-timepicker="start:11" type="text" id="form-end" required value="11:00"/>
                                 
                             </div>
                             <div class="form-group">
-                                <label for="name">Телефон*</label>
-                                <input id="name" type="text" required>
+                                <label for="phone">Телефон*</label>
+                                <input name="form-phone" id="form-phone" type="tel" required>
                             </div>
                         </div>
                         <div class="form-group form-wide">
                             <label for="message">Комментарий к заказу (не обязательно)</label>
-                            <textarea id="message" type="textarea" rows="1" placeholder=""></textarea>
+                            <textarea name="form-message" id="form-message" type="textarea" rows="1" placeholder=""></textarea>
                             
                         </div>
                         <div class="form-wide form-action">
                             <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
                             <div class="form-btn">
-                                <div id="modal-btn">
+                                <button type="submit" id="modal-btn">
                                     <a href="#">Отправить</a>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -107,6 +105,7 @@
             <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/form-select.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/datepicker.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/uikit/js/components/timepicker.min.js') }}"></script>
+            <script src="{{ asset('js/maskinput.js') }}"></script>
             <script type="text/javascript" src="{{ asset('js/form.js') }}"></script>
         {% endblock %}
     </body>

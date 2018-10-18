@@ -82,6 +82,7 @@ body {
 .menu-item a:hover {
   border-bottom: 1px solid grey;
   padding-bottom: 3px;
+  text-decoration: none;
 }
 
 .active a {
@@ -234,6 +235,8 @@ body {
   bottom: -4px;
   right: 17px;
   transition: all .3s ease;
+  border: none;
+  cursor: pointer;
 }
 
 #modal-btn:hover {
@@ -245,6 +248,7 @@ body {
 }
 
 #modal-btn a{
+  font-family: 'Akrobat';
   font-weight: 600;
   line-height: 24px;
   font-size: 18px;

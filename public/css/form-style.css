@@ -8,7 +8,8 @@
 	display:flex;
 	justify-content: center;
 	align-items: center;
-	font-style: Ubuntu;
+	font-style: 'Ubuntu';
+	z-index: 10;
 }
 
 #modal-form {
@@ -77,4 +78,16 @@
 .uk-button {
     width: 100%;
     text-align: left;
+}
+
+#form-message {
+	width: 100%;
+}
+
+#form-offer {
+	width: 100%;
+}
+
+#form-number {
+	width: 100%;
 }

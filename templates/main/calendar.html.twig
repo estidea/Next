@@ -1,3 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+    {{parent()}}
+{% endblock %}
+
 {% block title %}Календарь{% endblock %}
 
 {% block body %}
