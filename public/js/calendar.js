@@ -1,11 +1,12 @@
-function runCaledar() {
+function runCaledar(filter) {
+	console.log(filter);
 	var height = $('#desktop-center').height();
 	$('#calendar').fullCalendar({
 	    events: {
 	    	url: '/calendrierFeed',
 	    	data: function () { // a function that returns an object
                 return {
-                    category: '',
+                    categories: categories
                 };
             },
         },
@@ -37,11 +38,8 @@ function getNeighbourMonth() {
 }
 
 function customizeCalendar() {
-	// var moment = $('#calendar').fullCalendar('getDate');
-	// moment.locale('ru');
+
 	var months = getNeighbourMonth();
- //  	var nextMonth = moment.add(1, 'months').format('MMMM').slice(0,3);
- //  	var prevMonth = moment.subtract(2, 'months').format('MMMM').slice(0,3);
 	var calendarLeft = $('.fc-prev-button');
 	var calendarRight = $('.fc-next-button');
 	var calendarDate = $('.fc-toolbar');
@@ -67,12 +65,22 @@ function customizeCalendar() {
 }
 
 $(document).ready(function() {
-    runCaledar();
+    runCaledar(categories);
 
     $.when( runCaledar ).done(function () {
 	    customizeCalendar();
 	});
 
+    $("input:checkbox").change(function() { 
+            if($(this).is(":checked")) { 
+        	    categories.push($(this).val());
+            } else {
+            	position = $.inArray($(this).val(), categories);
+				if ( ~position ) categories.splice(position, 1);
+            	
+            }
+            $('#calendar').fullCalendar( 'refetchEvents' );
+        }); 
 });
 
 window.onresize = function(event) {

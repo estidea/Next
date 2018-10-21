@@ -21,7 +21,6 @@ class MainController extends AbstractController
         $offers = $em->getRepository(Offers::class)
             ->findAll();
 
-        $calendrier = array();
         return $this->render('main/index.html.twig', [
             'offers' => $offers
         ]);
@@ -33,37 +32,37 @@ class MainController extends AbstractController
 	public function feedAction(Request $request)
 	{
 	    $em = $this->getDoctrine()->getManager();
-        $category = $request->query->get('category');
-        if ($category == '') {
-            $events = $em->getRepository('App\Entity\Events')
-            ->findAll();
+        $calendrier = array();
+        $categories = $request->query->get('categories');
+        if ($categories != []) {
+            foreach ($categories as $category) {
+                $category_entity = $this->getDoctrine()
+                    ->getRepository(Category::class)
+                    ->findOneBy(
+                        ['title' => $category]
+                    );
+
+                $events = $category_entity->getEvents();
+                foreach ($events as $event) {
+                    $e = array();
+                    $e['id'] = $event->getId();
+                    $e['title'] = $event->getTitle();
+                    $e['start'] = $event->getBeginAt();
+                    $e['end'] = $event->getEndAt();
+                    $e['allDay'] = false;
+                    $e['textColor'] = $event->getCategory()->getColor();
+                    $e['color'] = '#0000';
+                    $e['backgroundColor'] = $event->getCategory()->getColor();
+                    $e['description'] = $category;
+
+                    array_push($calendrier, $e);
+                }
+            }
         } else {
-            $category_entity = $this->getDoctrine()
-                ->getRepository(Category::class)
-                ->findOneBy(
-                    ['title' => $category]
-                );
 
-            $events = $category_entity->getEvents();
         }
-	    
+        
 
-	    $calendrier = array();
-
-	    foreach ($events as $event) {
-	        $e = array();
-	        $e['id'] = $event->getId();
-	        $e['title'] = $event->getTitle();
-	        $e['start'] = $event->getBeginAt();
-	        $e['end'] = $event->getEndAt();
-	        $e['allDay'] = false;
-            $e['textColor'] = $event->getCategory()->getColor();
-            $e['color'] = '#0000';
-            $e['backgroundColor'] = $event->getCategory()->getColor();
-            $e['description'] = $category;
-
-	        array_push($calendrier, $e);
-	    }
 	    return $this->json($calendrier);
 	}
 
@@ -79,7 +78,8 @@ class MainController extends AbstractController
                         'description' => $offer->getDescription(),
                         'price' => $offer->getPrice(),
                         'photo' => $offer->getPhoto(),
-                        'slug' => $offer->getSlug()
+                        'slug' => $offer->getSlug(),
+                        'additional' => $offer->getAdditional()
                         ];
             return new JsonResponse($arrData);
         }
@@ -94,8 +94,11 @@ class MainController extends AbstractController
      */
     public function calendar()
     {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository(Category::class)
+            ->findAll();
         return $this->render('main/calendar.html.twig', [
-  
+            'categories' => $categories
         ]);
     }
 

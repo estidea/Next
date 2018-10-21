@@ -34,6 +34,7 @@
 						<a href="#">Забронировать</a>
 					</div>
 				</div>
+				<div id="modal-additional">* bhqwbh fwq f qwhf qwf hwf</div>
 			</div>
 		</div>
 	</div>
@@ -62,6 +63,73 @@
 		    {% endfor %}
 		</ul>
 	</div>
+	<div id="modal-form-wrapper">
+        <div id="modal-form">
+            <div class="modal-close" id="modal-form-close">
+                <img src="{{ asset('img/close.svg') }}">
+            </div>
+            <div id="form-title">Форма бронирования</div>
+            <div id="form-body">
+
+                <form id="booking" class="uk-form">
+
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input name="form-name" id="form-name" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-offer">Что бронируем</label>
+                                <select name="form-offer" id="form-offer">
+                                	{% for offer in offers %}
+										<option value="{{offer.slug}}">{{offer.title}}</option>
+								    {% endfor %}
+                                </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="number">Количество человек</label>
+                            <input name="form-number" id="form-number" type="number" min="1" value="1" required>
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="begin">Дата бронирования</label>
+                            <input name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
+                            
+                        </div>
+                        <div class="form-group form-time">
+                            <label for="begin">Начало</label>
+                            <input name="form-begin" data-uk-timepicker="start:11" type="text" id="form-begin" required value="11:00" />
+                            
+                        </div>
+                        <div class="form-group form-time">
+                            <label for="end">Конец</label>
+                            <input name="form-end" data-uk-timepicker="start:11" type="text" id="form-end" required value="11:00"/>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон*</label>
+                            <input name="form-phone" id="form-phone" type="tel" required>
+                        </div>
+                    </div>
+                    <div class="form-group form-wide">
+                        <label for="message">Комментарий к заказу (не обязательно)</label>
+                        <textarea name="form-message" id="form-message" type="textarea" rows="1" placeholder=""></textarea>
+                        
+                    </div>
+                    <div class="form-wide form-action">
+                        <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
+                        <div class="form-btn">
+                            <button type="submit" id="modal-btn">
+                                <a href="#">Отправить</a>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

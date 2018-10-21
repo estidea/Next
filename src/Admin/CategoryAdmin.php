@@ -14,17 +14,20 @@ class CategoryAdmin extends AbstractAdmin
     {
         $formMapper->add('title', TextType::class);
         $formMapper->add('color', TextType::class);
+        $formMapper->add('slug', TextType::class);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title');
         $datagridMapper->add('color');
+        $datagridMapper->add('slug');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('title');
         $listMapper->addIdentifier('color');
+        $listMapper->addIdentifier('slug');
     }
 }

@@ -56,8 +56,8 @@ function fireActive(svg, id) {
 	var activeItem = svg.getElementById(id);
 	var lightactive = svg.getElementById(id+'-light-active');
 	var lightness = svg.getElementById(id+'-light');
-	// var itemInList = document.getElementById(id+'-offer');
-	// itemInList.classList.toggle("offers-hovered");
+	var itemInList = document.getElementById(id+'-offer');
+	itemInList.classList.add("offers-hovered");
 	lightactive.classList.toggle("active");
 
 	activeItem.classList.add("hovered-item");
@@ -68,8 +68,8 @@ function shutActive(svg, id) {
 		var activeItem = svg.getElementById(id);
 		var lightactive = svg.getElementById(id+'-light-active');
 		var lightness = svg.getElementById(id+'-light');
-		// var itemInList = document.getElementById(id+'-offer');
-		// itemInList.classList.toggle("offers-hovered");
+		var itemInList = document.getElementById(id+'-offer');
+		itemInList.classList.remove("offers-hovered");
 		lightactive.classList.toggle("active");
 		activeItem.classList.remove("hovered-item");
 		lightness.classList.toggle("hovered");
@@ -166,6 +166,8 @@ function getDescription(id) {
             	$("#modal-title").html(data.title);
             	$("#modal-description").html(data.description);
             	$("#modal-price span").html(data.price);
+            	$("#modal-additional").html(data.additional);
+            	$("#modal-btn a").attr("id", data.slug);
 				$("#modal-card").css('transform', 'translateX(0%)');
             }
         });
@@ -185,4 +187,12 @@ $(document).on('click', '#modal-close', function(){
     setTimeout (function(){
     	$('#modal-card').css('opacity', '1');
     }, 200); 
+});
+
+
+$(document).on('click', '#modal-btn', function(){
+	var offer =  $(this).children("a").attr("id");
+	$('select option[value="'+offer+'"]').prop('selected', true);
+    $('#modal-form-wrapper').css('opacity', '1');
+    $("#modal-form-wrapper").css('transform', 'translateY(0%)');
 });

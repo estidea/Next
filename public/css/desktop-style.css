@@ -199,7 +199,7 @@ body {
 #modal-action {
   display: flex;
   justify-content: space-between;
-  padding: 0 18px 18px 0;
+  padding: 0 18px 0 0;
 }
 
 #modal-price {
@@ -255,6 +255,12 @@ body {
   color: #FFFFFF;
 }
 
+#modal-additional {
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: normal;
+}
+
 #main-svg {
 	width:100%;
 	height:auto;
@@ -300,6 +306,26 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
+}
+
+#filter-events h3{
+  font-weight: 300;
+  font-size: 24px;
+  color: white;
+  margin-top: 24px;
+  font-family: ubuntu;
+}
+
+.checkbox-group {
+  position: relative;
+  margin: 12px 0;
+  width: 100%;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 24px;
+  font-size: 18px;
+
+  color: #FFFFFF;
 }
 
 .fc-state-default.fc-corner-left,.fc-corner-right {

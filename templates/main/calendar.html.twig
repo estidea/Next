@@ -29,7 +29,16 @@
             </div>
             <div id="calendar-right"></div>
         </div>
-
+        
+        <form id="filter-events">
+            <h3>Отображаемые категории:</h3>
+            {% for category in categories %}
+            <div class="checkbox-group">
+                <input type="checkbox" name="filter-event" value="{{category.title}}" checked="checked">
+                <label for="{{category.title}}" style="color:{{category.color}}">{{category.title}}</label>
+            </div>
+            {% endfor %}
+        </form>
         <div id="modal-card">
             <div id="modal-left">
                 <div id="modal-photo"></div>
@@ -60,7 +69,17 @@
 {% endblock %}
 
 {% block javascripts %}
+    
+
 	{{parent()}}
+    <script>
+    var categories = [];
+        {% for category in categories %}
+            categories.push('{{category.title}}');
+        {% endfor %}
+
+    </script>
+    
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
@@ -72,6 +91,8 @@
     {% else %}
         <script src="{{ asset('js/calendar.js') }}"></script>
     {% endif %}
+
+
 
     
 {% endblock %}

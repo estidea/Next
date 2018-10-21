@@ -33,6 +33,11 @@ class Category
      */
     private $events;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -100,5 +105,17 @@ class Category
 
     public function __toString() {
         return $this->title;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
