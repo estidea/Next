@@ -143,4 +143,32 @@ class MainController extends AbstractController
         // redirects to the "main" route
         return $this->redirectToRoute('home');
     }
+
+    /**
+     * @Route("/event-form", name="event-form", methods={"POST"})
+     */
+    public function eventForm(Request $request)
+    {
+        if($request->getMethod() == 'POST'){
+            $name = $request->request->get('form-name');
+            $event = $request->request->get('form-event');
+            $number = $request->request->get('form-number');
+            $date = $request->request->get('form-date');
+            $begin = $request->request->get('form-begin');
+            $phone = $request->request->get('form-phone');
+            $message = $request->request->get('form-message');
+            $arrData = ['name' => $name,
+                        'event' => $event,
+                        'number' => $number,
+                        'date' => $date,
+                        'begin' => $begin,
+                        'phone' => $phone,
+                        'message' => $message
+                        ];
+            return new JsonResponse($arrData);
+        }
+        
+        // redirects to the "main" route
+        return $this->redirectToRoute('home');
+    }
 }

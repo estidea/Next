@@ -172,6 +172,8 @@ function getDescription(id) {
             	if (data.button == true) {
             		if (data.href != '') {
             			$("#modal-btn a").attr("href", data.href);
+            		} else {
+            			$("#modal-btn a").attr("href", '#');
             		}
             		
             	} else {

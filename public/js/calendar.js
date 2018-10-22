@@ -1,5 +1,4 @@
 function runCaledar(filter) {
-	console.log(filter);
 	var height = $('#desktop-center').height();
 	$('#calendar').fullCalendar({
 	    events: {
@@ -17,6 +16,9 @@ function runCaledar(filter) {
 	    timeFormat: 'H:mm',
 	    contentHeight: height,
 	    eventClick : function( event, jsEvent, view ) {
+	    	$('input[name=form-event').attr("value", event.title);
+	    	$('input[name=form-date').attr("value", event.start.format('Do MMMM'));
+	    	$('input[name=form-begin').attr("value", event.start.format('H:mm'));
 		    $('#modal-form-wrapper').css('opacity', '1');
 		    $("#modal-form-wrapper").css('transform', 'translateY(0%)');
 		    $("#event-title").html(event.title);
@@ -24,7 +26,6 @@ function runCaledar(filter) {
 		    $("#event-date").html(event.start.format('Do MMMM, dddd'));
 		    $("#event-begin").html(event.start.format('H:mm'));
 		    $("#event-end").html(event.end.format('H:mm'));
-	    	console.log(event);
 	    }
 	});
 }
