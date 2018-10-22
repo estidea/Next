@@ -20,6 +20,7 @@
         <ul id="menu">
             <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
             <li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
+            <li class="menu-item {{ app.request.get('_route') == 'contacts' ? 'active' }}"><a href="{{ path('contacts') }}">Контакты</a></li>
         </ul>
 
         <div id="calendar-manage">
@@ -34,29 +35,11 @@
             <h3>Отображаемые категории:</h3>
             {% for category in categories %}
             <div class="checkbox-group">
-                <input type="checkbox" name="filter-event" value="{{category.title}}" checked="checked">
+                <input type="checkbox" name="filter-event" id="{{category.title}}" value="{{category.title}}" checked="checked">
                 <label for="{{category.title}}" style="color:{{category.color}}">{{category.title}}</label>
             </div>
             {% endfor %}
         </form>
-        <div id="modal-card">
-            <div id="modal-left">
-                <div id="modal-photo"></div>
-            </div>
-            <div id="modal-right">
-                <div id="modal-info">
-                    <div id="modal-close"><img src="{{ asset('img/close.svg') }}"></div>
-                    <h3 id="modal-title">Клуб Мафии</h3>
-                    <p id="modal-description">Единственный в Черноморске официальный клуб мафии. Игры проводятся профессиональным ведущим</p>
-                </div>
-                <div id="modal-action">
-                    <div id="modal-price"><span>70 грн</span></div>
-                    <div id="modal-btn">
-                        <a href="#">Забронировать</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <div id="desktop-center">
@@ -65,7 +48,50 @@
 <div id="mobile-center">
     <div id='mobile-calendar'></div>
 </div>
+<div id="modal-form-wrapper">
+    <div id="modal-form">
+        <div class="modal-close" id="modal-form-close">
+            <img src="{{ asset('img/close.svg') }}">
+        </div>
+        <div id="form-title">Забронировать мероприятие</div>
+        <h3><strong>Название:</strong> <span id="event-title"></span></h3>
+        <p><strong>Описание:</strong> <span id="event-description"></span></p>
+        <p><strong>Дата:</strong> <span id="event-date"></span></p>
+        <p><strong>Время:</strong> <span id="event-begin"></span>-<span id="event-end"></span></p>
+        <div id="form-body">
+            <form id="event-booking" class="uk-form">
+                <div class="form-wide">
+                    <div class="form-inline">
+                        <label for="name">Имя</label>
+                        <input name="form-name" id="form-name" type="text" required>
+                    </div>
+                    <div class="form-inline">
+                        <label for="number">Количество человек</label>
+                        <input name="form-number" id="form-number" type="number" min="1" value="1" required>
+                    </div>
+                    <div class="form-inline">
+                        <label for="phone">Телефон*</label>
+                        <input name="form-phone" id="form-phone" type="tel" required>
+                    </div>
+                </div>
     
+                <div class="form-group form-wide">
+                    <label for="message">Комментарий к заказу (не обязательно)</label>
+                    <textarea name="form-message" id="form-message" type="textarea" rows="1" placeholder=""></textarea>
+                    
+                </div>
+                <div class="form-wide form-action">
+                    <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
+                    <div class="form-btn">
+                        <button type="submit" id="modal-btn">
+                            <a href="#">Отправить</a>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}

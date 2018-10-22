@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block body %}
+<div id="left-side" class="left-side-calendar">
+    <div id="static">
+        {% if is_mobile() %}
+        <div id="logo">
+            <img src="{{ asset('img/logo-mobile.svg') }}">
+        </div>
+        {% else %}
+            <img id="logo" src="{{ asset('img/logo.png') }}">
+        {% endif %}
+        <ul id="menu">
+            <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
+            <li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
+            <li class="menu-item {{ app.request.get('_route') == 'contacts' ? 'active' }}"><a href="{{ path('contacts') }}">Контакты</a></li>
+        </ul>
+
+    </div>
+</div>
+<div id="desktop-center">
+    <div id='calendar'></div>
+</div>
+<div id="mobile-center">
+    <div id='mobile-calendar'></div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    
+
+	{{parent()}}
+
+{% endblock %}

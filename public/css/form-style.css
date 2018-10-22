@@ -22,6 +22,10 @@
 	padding: 72px;
 }
 
+#modal-form h3, #modal-form h3 span, #modal-form p, #modal-form p span {
+	font-size: 18px;
+}
+
 #form-title {
 	font-family: Ubuntu;
 	font-style: normal;
@@ -34,6 +38,12 @@
   position: relative;
   margin: 24px 0;
   width: 100%;
+}
+
+.form-inline {
+	position: relative;
+	margin: 24px 0;
+	max-width: 30%;
 }
 
 .form-column {
@@ -49,6 +59,9 @@
 
 .form-wide {
     width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .form-action {
@@ -59,7 +72,7 @@
 	flex:1;
 }
 
-#booking {
+#booking, #event-booking {
 	display: flex;
 	flex-wrap: wrap;
 	width:516px;

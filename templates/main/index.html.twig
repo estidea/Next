@@ -16,6 +16,7 @@
 			<ul id="menu">
 				<li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
 				<li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
+                <li class="menu-item {{ app.request.get('_route') == 'contacts' ? 'active' }}"><a href="{{ path('contacts') }}">Контакты</a></li>
 			</ul>
 		</div>
 		<div id="modal-card">
@@ -82,7 +83,9 @@
                             <label for="form-offer">Что бронируем</label>
                                 <select name="form-offer" id="form-offer">
                                 	{% for offer in offers %}
+                                		{% if (offer.button == true) and (offer.href == '')  %}
 										<option value="{{offer.slug}}">{{offer.title}}</option>
+										{% endif %}
 								    {% endfor %}
                                 </select>
                         </div>

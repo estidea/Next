@@ -16,8 +16,14 @@ function runCaledar(filter) {
 	    editable:false,
 	    timeFormat: 'H:mm',
 	    contentHeight: height,
-	    eventMouseover: function( event, jsEvent, view ) {
-	    	console.log(event.description);
+	    eventClick : function( event, jsEvent, view ) {
+		    $('#modal-form-wrapper').css('opacity', '1');
+		    $("#modal-form-wrapper").css('transform', 'translateY(0%)');
+		    $("#event-title").html(event.title);
+		    $("#event-description").html(event.description);
+		    $("#event-date").html(event.start.format('Do MMMM, dddd'));
+		    $("#event-begin").html(event.start.format('H:mm'));
+		    $("#event-end").html(event.end.format('H:mm'));
 	    	console.log(event);
 	    }
 	});
@@ -87,3 +93,4 @@ window.onresize = function(event) {
 	var height = $('#desktop-center').height();
 	$('#calendar').fullCalendar('option', 'contentHeight', height);
 };
+

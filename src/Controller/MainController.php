@@ -79,7 +79,9 @@ class MainController extends AbstractController
                         'price' => $offer->getPrice(),
                         'photo' => $offer->getPhoto(),
                         'slug' => $offer->getSlug(),
-                        'additional' => $offer->getAdditional()
+                        'additional' => $offer->getAdditional(),
+                        'button' => $offer->getButton(),
+                        'href' => $offer->getHref()
                         ];
             return new JsonResponse($arrData);
         }

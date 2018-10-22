@@ -168,6 +168,15 @@ function getDescription(id) {
             	$("#modal-price span").html(data.price);
             	$("#modal-additional").html(data.additional);
             	$("#modal-btn a").attr("id", data.slug);
+            	$("#modal-btn").css('display','flex');
+            	if (data.button == true) {
+            		if (data.href != '') {
+            			$("#modal-btn a").attr("href", data.href);
+            		}
+            		
+            	} else {
+            		$("#modal-btn").css('display','none');
+            	}
 				$("#modal-card").css('transform', 'translateX(0%)');
             }
         });
@@ -192,7 +201,10 @@ $(document).on('click', '#modal-close', function(){
 
 $(document).on('click', '#modal-btn', function(){
 	var offer =  $(this).children("a").attr("id");
-	$('select option[value="'+offer+'"]').prop('selected', true);
-    $('#modal-form-wrapper').css('opacity', '1');
-    $("#modal-form-wrapper").css('transform', 'translateY(0%)');
+	var href =  $(this).children("a").attr("href");
+	if (href == '#') {
+		$('select option[value="'+offer+'"]').prop('selected', true);
+	    $('#modal-form-wrapper').css('opacity', '1');
+	    $("#modal-form-wrapper").css('transform', 'translateY(0%)');
+	};
 });
