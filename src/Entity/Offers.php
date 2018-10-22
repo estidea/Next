@@ -46,6 +46,16 @@ class Offers
      */
     private $additional;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $button;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $href;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +129,30 @@ class Offers
     public function setAdditional(?string $additional): self
     {
         $this->additional = $additional;
+
+        return $this;
+    }
+
+    public function getButton(): ?bool
+    {
+        return $this->button;
+    }
+
+    public function setButton(bool $button): self
+    {
+        $this->button = $button;
+
+        return $this;
+    }
+
+    public function getHref(): ?string
+    {
+        return $this->href;
+    }
+
+    public function setHref(string $href): self
+    {
+        $this->href = $href;
 
         return $this;
     }
