@@ -146,6 +146,10 @@ window.addEventListener("load", function() {
 	for (var i=0;i<8;i++) {
 		lightHover(items[i], mainsvg);
 	}
+	setTimeout(function() {
+		$("#preloader-bg").toggleClass("preloader-active");
+	    $(".pong-loader").toggleClass("preloader-active");
+	},2000);
 });
 
 function getDescription(id) {

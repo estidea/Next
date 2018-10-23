@@ -17,6 +17,13 @@
   src: local('Akrobat ExtraLight'), url('../fonts/Akrobat-ExtraLight.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Ubuntu Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Ubuntu Light'), url('../fonts/Ubuntu-Light.woff') format('woff');
+}
+
 html, body {
 	height:100vh;
 }
@@ -47,7 +54,7 @@ body {
 	width: 90vw;
 	height: 100%;
 	position: fixed;
-	z-index: -1;
+	z-index: 0;
 	display: flex;
 	align-items: center;
 }
@@ -62,6 +69,7 @@ body {
   padding:72px;
   display:flex;
   justify-content: space-between;
+  z-index: 1;
 }
 
 #menu {
@@ -313,7 +321,7 @@ body {
   font-size: 24px;
   color: white;
   margin-top: 24px;
-  font-family: ubuntu;
+  font-family: 'Ubuntu Light';
 }
 
 .checkbox-group {
@@ -489,4 +497,29 @@ body {
   background-color: #fff0 !important;
 }
 
-/* Preloader */
+/* Contacts page */
+#map {
+  position: absolute;
+  z-index: 0;
+  top: -72px;
+  left: -72px;
+  width: calc(100vw + 72px);
+  height: calc(100vh + 72px);
+}
+
+#left-contacts {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 18px;
+  font-family: 'ubuntu';
+}
+
+.contact-item {
+  margin-top: 12px;
+}
+
+#marker {
+  width:100px;
+  height:100px;
+}
