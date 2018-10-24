@@ -4,6 +4,11 @@ var items = ['mafia','tennis','koworking','board','birthday','consoles','barka',
 
 window.addEventListener("load", function() {
     $('#mafia-offer').toggleClass('active');
+    setTimeout(function() {
+        $("#preloader-bg").toggleClass("preloader-active");
+        $(".pong-loader").toggleClass("preloader-active");
+        $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
+    },1000);
 });
 
 function showModal(id) {
@@ -35,8 +40,24 @@ function getDescription(id) {
             	$("#mobile-title").html(data.title);
             	$("#mobile-description").html(data.description);
             	$("#mobile-price span").html(data.price);
+                if (data.additional != null) {
+                    $("#mobile-additional").css('display','block');
+                    $("#mobile-additional").html(data.additional);
+                } else {
+                    $("#mobile-additional").css('display','none');
+                }
             }
         });
     return false;
 	}
 }
+
+$(document).on('click', '#mobile-btn', function(){
+    var offer =  $(this).children("a").attr("id");
+    var href =  $(this).children("a").attr("href");
+    if (href == '#') {
+        $('select option[value="'+offer+'"]').prop('selected', true);
+        $('#modal-form-wrapper').css('opacity', '1');
+        $("#modal-form-wrapper").css('transform', 'translateY(0%)');
+    };
+});

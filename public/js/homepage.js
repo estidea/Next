@@ -149,11 +149,14 @@ window.addEventListener("load", function() {
 	setTimeout(function() {
 		$("#preloader-bg").toggleClass("preloader-active");
 	    $(".pong-loader").toggleClass("preloader-active");
+	    $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
 	},2000);
 });
 
 function getDescription(id) {
 	if (id != window.previous) {
+		$("#preloader-bg").addClass("preloader-active");
+	    $(".pong-loader").addClass("preloader-active");
 		$("#modal-card").css('transform', 'translateX(-200%)');
 		var project_id = $(this).data('id');
     	that = $(this);
@@ -167,6 +170,8 @@ function getDescription(id) {
             async: true,
             success: function (data)
             {
+            	$("#preloader-bg").removeClass("preloader-active");
+			    $(".pong-loader").removeClass("preloader-active");
             	$("#modal-title").html(data.title);
             	$("#modal-description").html(data.description);
             	$("#modal-price span").html(data.price);

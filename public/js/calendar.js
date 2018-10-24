@@ -26,6 +26,13 @@ function runCaledar(filter) {
 		    $("#event-date").html(event.start.format('Do MMMM, dddd'));
 		    $("#event-begin").html(event.start.format('H:mm'));
 		    $("#event-end").html(event.end.format('H:mm'));
+	    },
+	    eventAfterAllRender: function() {
+			$("#preloader-bg").removeClass("preloader-active");
+		    $(".pong-loader").removeClass("preloader-active");
+	    },
+	    eventDestroy: function() {
+	    	
 	    }
 	});
 }
@@ -62,14 +69,20 @@ function customizeCalendar() {
 		var months = getNeighbourMonth();
 		$('.fc-icon-left-single-arrow').text(months.prevMonth);
 		$('.fc-icon-right-single-arrow').text(months.nextMonth);
+		$("#preloader-bg").addClass("preloader-active");
+	    $(".pong-loader").addClass("preloader-active");
 	});
 
 	$(".fc-next-button").click(function() {
 		var months = getNeighbourMonth();
 		$('.fc-icon-left-single-arrow').text(months.prevMonth);
 		$('.fc-icon-right-single-arrow').text(months.nextMonth);
+		$("#preloader-bg").addClass("preloader-active");
+	    $(".pong-loader").addClass("preloader-active");
 	});
 }
+
+
 
 $(document).ready(function() {
     runCaledar(categories);
@@ -77,6 +90,8 @@ $(document).ready(function() {
     $.when( runCaledar ).done(function () {
 	    customizeCalendar();
 	});
+
+	$("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
 
     $("input:checkbox").change(function() { 
             if($(this).is(":checked")) { 
