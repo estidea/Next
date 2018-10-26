@@ -19,7 +19,7 @@
                 <a href="{{ path('home') }}"><img src="{{ asset('img/logo-mobile.svg') }}"></a>
             </div>
         {% else %}
-            <a href="{{ path('home') }}"><img id="logo" src="{{ asset('img/logo.png') }}"></a>
+            <a href="{{ path('home') }}"><img id="logo" src="{{ asset('img/logo-desktop.svg') }}"></a>
         {% endif %}
         <ul id="menu">
             <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
