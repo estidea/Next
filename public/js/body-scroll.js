@@ -2,9 +2,9 @@
 const targetElement = document.querySelector("body");
 
 // 2. ...in some event handler after showing the target element...disable body scroll
-window.addEventListener("load", function() {
-	bodyScrollLock.disableBodyScroll(targetElement);
-});
+// window.addEventListener("load", function() {
+// 	bodyScrollLock.disableBodyScroll(targetElement);
+// });
 
 // 3. ...in some event handler after hiding the target element...
 // bodyScrollLock.enableBodyScroll(targetElement);
