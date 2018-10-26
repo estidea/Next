@@ -45,24 +45,30 @@ class MainController extends AbstractController
                 $events = $category_entity->getEvents();
                 foreach ($events as $event) {
                     $e = array();
+                    $is_recurring = $event->getRecurring();
+                    if ($is_recurring == 'yes') {
+                        $num_day = $event->getBeginAt()->format('N');
+                        $e['start'] = $event->getBeginAt()->format('H:i');
+                        $e['end'] = $event->getEndAt()->format('H:i');
+                        $e['dow'] = array((7 == $num_day) ? '0' : $num_day);
+                    } else {
+                        $e['start'] = $event->getBeginAt();
+                        $e['end'] = $event->getEndAt();
+                    }
                     $e['id'] = $event->getId();
                     $e['title'] = $event->getTitle();
-                    $e['start'] = $event->getBeginAt();
-                    $e['end'] = $event->getEndAt();
-                    $e['allDay'] = false;
                     $e['textColor'] = $event->getCategory()->getColor();
                     $e['color'] = '#0000';
                     $e['backgroundColor'] = $event->getCategory()->getColor();
                     $e['description'] = $category;
+                    
 
                     array_push($calendrier, $e);
                 }
             }
         } else {
-
         }
         
-
 	    return $this->json($calendrier);
 	}
 
