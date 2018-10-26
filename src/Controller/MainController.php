@@ -46,7 +46,7 @@ class MainController extends AbstractController
                 foreach ($events as $event) {
                     $e = array();
                     $is_recurring = $event->getRecurring();
-                    if ($is_recurring == 'yes') {
+                    if ($is_recurring) {
                         $num_day = $event->getBeginAt()->format('N');
                         $e['start'] = $event->getBeginAt()->format('H:i');
                         $e['end'] = $event->getEndAt()->format('H:i');

@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class EventsAdmin extends AbstractAdmin
 {
@@ -21,7 +22,12 @@ class EventsAdmin extends AbstractAdmin
             'date_widget' => 'single_text'));
         $formMapper->add('endAt', DateTimeType::class,array(
             'date_widget' => 'single_text'));
-        $formMapper->add('recurring', TextType::class);
+        $formMapper->add('recurring', ChoiceType::class, array(
+            'choices'  => array(
+                'yes' => true,
+                'no' => false,
+            ),
+        ));
         $formMapper->add('category', EntityType::class, array(
             'class' => Category::class,
             'choice_label' => 'title',
