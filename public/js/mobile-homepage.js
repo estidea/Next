@@ -22,6 +22,8 @@ function showModal(id) {
 };
 
 function getDescription(id) {
+    $("#preloader-bg").addClass("preloader-active");
+    $(".pong-loader").addClass("preloader-active");
 	if (id != window.previous) {
 		$("#modal-card").css('transform', 'translateX(-200%)');
 		var project_id = $(this).data('id');
@@ -36,6 +38,8 @@ function getDescription(id) {
             async: true,
             success: function (data)
             {
+                $("#preloader-bg").removeClass("preloader-active");
+                $(".pong-loader").removeClass("preloader-active");
                 $("#mobile-center-image").attr("src","/img/mobile/"+data.slug+".svg");
             	$("#mobile-title").html(data.title);
             	$("#mobile-description").html(data.description);

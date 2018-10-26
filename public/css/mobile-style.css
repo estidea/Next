@@ -35,7 +35,7 @@ a,p,span,h1,h2,h3,h4,h5,h6,li {
 body {
   margin: 0;
   display:flex;
-  background: url('../img/bg-mobile.jpg') center center;
+  background: linear-gradient(180deg, #010D0F 0%, #01191C 100%);
   background-size: cover;
   align-items: flex-end;
   justify-content: center;
@@ -268,8 +268,10 @@ input {
 
 #modal-form {
   padding: 18px;
-  height: calc(100vh - 48px);
-  overflow: scroll;
+  height: 100%;
+  overflow: auto;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
 #modal-form-wrapper {

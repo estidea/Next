@@ -41,7 +41,7 @@ a,p,span,h1,h2,h3,h4,h5,h6,li {
 
 body {
   margin: 0;
-  background: url(../img/bg.jpg) no-repeat fixed;
+  background: linear-gradient(66.16deg, #000000 13.83%, #002F35 114.59%);
   background-size: cover;
   background-position: center;
   display:flex;
