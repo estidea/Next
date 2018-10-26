@@ -199,7 +199,7 @@ $(document).on('click', '#modal-close', function(){
 	var svg = document.getElementById('main-svg').contentDocument;
 	shutActive(svg, window.current);
 	var itemInList = document.getElementById(window.current+'-offer');
-	itemInList.classList.toggle("offers-hovered");
+	itemInList.classList.remove("offers-hovered");
     $('#modal-card').css('opacity', '0');
     $("#modal-card").css('transform', 'translateX(-150%)');
     window.current = '';

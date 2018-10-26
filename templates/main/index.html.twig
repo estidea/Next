@@ -7,10 +7,10 @@
 		<div id="static">
 			{% if is_mobile() %}
 			<div id="logo">
-                <img src="{{ asset('img/logo-mobile.svg') }}">
+                <a href="{{ path('home') }}"><img src="{{ asset('img/logo-mobile.svg') }}"></a>
             </div>
             {% else %}
-                <img id="logo" src="{{ asset('img/logo.png') }}">
+                <a href="{{ path('home') }}"><img id="logo" src="{{ asset('img/logo.png') }}"></a>
             {% endif %}
 			
 			<ul id="menu">
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div id="desktop-center">
-		<object id="main-svg" type="image/svg+xml" data="{{ asset('img/next-light8-areas-darker.svg') }}">Your browser does not support SVGs</object>
+		<object id="main-svg" type="image/svg+xml" data="{{ asset('img/next-main.svg') }}">Your browser does not support SVGs</object>
 	</div>
 	<div id="mobile-center">
 		<div id="mobile-center-top">
@@ -60,9 +60,17 @@
 	</div>
 	<div id="right-side">
 		<ul id="offers">
-			{% for offer in offers %}
-				<li onmouseover="hoverList('{{offer.slug}}')" onmouseout="hideList('{{offer.slug}}')" onclick="showModal('{{offer.slug}}')"><a id="{{offer.slug}}-offer" href="#" >{{offer.title}}</a></li>
-		    {% endfor %}
+            {% if is_mobile() %}
+                {% for offer in offers %}
+                    <li onclick="showModal('{{offer.slug}}')"><a id="{{offer.slug}}-offer" href="#" >{{offer.title}}</a></li>
+                {% endfor %}
+            {% else %}
+                {% for offer in offers %}
+                    <li onmouseover="hoverList('{{offer.slug}}')" onmouseout="hideList('{{offer.slug}}')" onclick="showModal('{{offer.slug}}')"><a id="{{offer.slug}}-offer" href="#" >{{offer.title}}</a></li>
+                {% endfor %}
+            {% endif %}
+
+			
 		</ul>
 	</div>
 	<div id="modal-form-wrapper">

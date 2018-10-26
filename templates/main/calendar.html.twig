@@ -11,11 +11,11 @@
 <div id="left-side" class="left-side-calendar">
     <div id="static">
         {% if is_mobile() %}
-        <div id="logo">
-            <img src="{{ asset('img/logo-mobile.svg') }}">
-        </div>
+            <div id="logo">
+                <a href="{{ path('home') }}"><img src="{{ asset('img/logo-mobile.svg') }}"></a>
+            </div>
         {% else %}
-            <img id="logo" src="{{ asset('img/logo.png') }}">
+            <a href="{{ path('home') }}"><img id="logo" src="{{ asset('img/logo.png') }}"></a>
         {% endif %}
         <ul id="menu">
             <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
