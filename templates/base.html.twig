@@ -32,6 +32,9 @@
         <div id="preloader-bg" class="preloader-active"></div>
         <div class="pong-loader preloader-active"></div>
         {% block javascripts %}
+            {% if is_mobile() %}
+                <script type="text/javascript" src="{{ asset('js/mobile-height.js') }}"></script> 
+            {% endif %}
             <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('uikit/js/uikit.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('uikit/js/components/autocomplete.min.js') }}"></script>

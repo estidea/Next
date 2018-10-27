@@ -14,10 +14,17 @@ jQuery(function($){
 });
 
 $('#booking').submit(function(e) {
+    $("#preloader-bg").addClass("preloader-active");
+    $(".pong-loader").addClass("preloader-active");
     e.preventDefault();
     var url = "/form";
     var formSerialize = $(this).serialize();
     $.post(url, formSerialize, function(response) {
+        $("#preloader-bg").removeClass("preloader-active");
+        $(".pong-loader").removeClass("preloader-active");
+        $('#modal-form-wrapper').css('opacity', '0');
+        $("#modal-form-wrapper").css('transform', 'translateY(-200%)');
+        $("#modal-card").css('transform', 'translateX(-200%)');
     }, 'JSON');
 });
 
@@ -26,7 +33,8 @@ $('#event-booking').submit(function(e) {
     var url = "/event-form";
     var formSerialize = $(this).serialize();
     $.post(url, formSerialize, function(response) {
-        console.log(response);
+        $('#modal-form-wrapper').css('opacity', '0');
+        $("#modal-form-wrapper").css('transform', 'translateY(-200%)');
     }, 'JSON');
 });
 
