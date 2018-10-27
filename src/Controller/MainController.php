@@ -113,8 +113,33 @@ class MainController extends AbstractController
     /**
      * @Route("/contacts", name="contacts")
      */
-    public function contacts()
+    public function contacts(\Swift_Mailer $mailer)
     {
+        $message = (new \Swift_Message('Hello Email'))
+        ->setFrom('send@example.com')
+        ->setTo('nick.whatsoever@gmail.com')
+        ->setBody(
+            $this->renderView(
+                // templates/emails/registration.html.twig
+                'emails/booking.html.twig'
+            ),
+            'text/html'
+        )
+        /*
+         * If you also want to include a plaintext version of the message
+        ->addPart(
+            $this->renderView(
+                'emails/registration.txt.twig',
+                array('name' => $name)
+            ),
+            'text/plain'
+        )
+        */
+    ;
+
+    $mailer->send($message);
+
+    return $this->render(...);
         return $this->render('main/contacts.html.twig', [
   
         ]);
