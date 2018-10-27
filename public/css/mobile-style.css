@@ -18,8 +18,6 @@
 }
 
 html, body {
-  /*height:100vh;
-  height: calc(var(--vh, 1vh) * 100);*/
   height: 100%;
 }
 
@@ -35,6 +33,8 @@ a,p,span,h1,h2,h3,h4,h5,h6,li {
 }
 
 body {
+  box-sizing: border-box;
+  position: relative;
   margin: 0;
   display:-webkit-box;
   display:-ms-flexbox;
@@ -43,14 +43,13 @@ body {
   background: -webkit-linear-gradient(top, #010D0F 0%, #01191C 100%);
   background: -o-linear-gradient(top, #010D0F 0%, #01191C 100%);
   background: linear-gradient(180deg, #010D0F 0%, #01191C 100%);
-  background-size: cover;
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  overflow: hidden;
+  overflow: auto;
 }
 
 #left-side {
