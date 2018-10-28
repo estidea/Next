@@ -115,10 +115,7 @@ class MainController extends AbstractController
      */
     public function contacts()
     {
-
-
         return $this->render('main/contacts.html.twig', [
-  
         ]);
     }
 
