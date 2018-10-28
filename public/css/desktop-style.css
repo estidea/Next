@@ -149,6 +149,7 @@ body {
 }
 
 #right-side {
+  z-index: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -368,12 +369,38 @@ body {
     min-width: 240px;
 }
 
+/* SVG flying effect */
+@-webkit-keyframes fly-animation {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50% { transform:translateY(-1%) rotate(0.01deg) }
+  100%   { transform: translateY(0) rotate(0deg); }
+}
+@-moz-keyframes fly-animation {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50% { transform:translateY(-1%) rotate(0.01deg) }
+  100%   { transform: translateY(0) rotate(0deg); }
+}
+@-o-keyframes fly-animation {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50% { transform:translateY(-1%) rotate(0.01deg) }
+  100%   { transform: translateY(0) rotate(0deg); }
+}
+@keyframes fly-animation {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50% { transform:translateY(-1%) rotate(0.01deg) }
+  100%   { transform: translateY(0) rotate(0deg); }
+}
+
 #main-svg {
   width:100%;
   height:auto;
-  -webkit-transition: all 2s ease;
-  -o-transition: all 2s ease;
-  transition: all 2s ease;
+  -webkit-transition: all 4s ease;
+  -o-transition: all 4s ease;
+  transition: all 4s ease;
+   -webkit-animation: fly-animation 4s infinite; /* Safari 4+ */
+  -moz-animation:    fly-animation 4s infinite; /* Fx 5+ */
+  -o-animation:      fly-animation 4s infinite; /* Opera 14+ */
+  animation:         fly-animation 4s infinite; /* IE 10+, Fx 29+ */
 }
 
 #offers {
@@ -658,4 +685,17 @@ body {
 #marker {
   width:100px;
   height:100px;
+}
+
+@media (max-width: 1100px) {
+  .main-container {
+      height: calc(100% - 48px);
+      padding: 24px;
+  }
+
+  #modal-card {
+    bottom: 24px;
+    left: 70px;
+    width: 42vw;
+  }
 }

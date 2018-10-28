@@ -151,15 +151,6 @@ window.addEventListener("load", function() {
 	    $(".pong-loader").toggleClass("preloader-active");
 	    $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
 	},2000);
-	setInterval(function(){
-		$("#main-svg").css('-webkit-transform','translateY(-1%) rotate(0.01deg)');
-		$("#main-svg").css('transform','translateY(-1%) rotate(0.01deg)');
-		$("#main-svg").css('-moz-transform','translateY(-1%) rotate(0.01deg)');
-		$("#main-svg").css('-ms-transform','translateY(-1%) rotate(0.01deg');
-		setTimeout(function(){
-			$("#main-svg").css('transform','translateY(0)');
-		},2000);
-	},4000);
 });
 
 function getDescription(id) {
