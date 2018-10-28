@@ -113,33 +113,10 @@ class MainController extends AbstractController
     /**
      * @Route("/contacts", name="contacts")
      */
-    public function contacts(\Swift_Mailer $mailer)
+    public function contacts()
     {
-        $message = (new \Swift_Message('Hello Email'))
-        ->setFrom('send@example.com')
-        ->setTo('nick.whatsoever@gmail.com')
-        ->setBody(
-            $this->renderView(
-                // templates/emails/registration.html.twig
-                'emails/booking.html.twig'
-            ),
-            'text/html'
-        )
-        /*
-         * If you also want to include a plaintext version of the message
-        ->addPart(
-            $this->renderView(
-                'emails/registration.txt.twig',
-                array('name' => $name)
-            ),
-            'text/plain'
-        )
-        */
-    ;
 
-    $mailer->send($message);
 
-    return $this->render(...);
         return $this->render('main/contacts.html.twig', [
   
         ]);
@@ -148,7 +125,7 @@ class MainController extends AbstractController
     /**
      * @Route("/form", name="form", methods={"POST"})
      */
-    public function form(Request $request)
+    public function form(Request $request, \Swift_Mailer $mailer)
     {
         if($request->getMethod() == 'POST'){
             $name = $request->request->get('form-name');
@@ -168,6 +145,28 @@ class MainController extends AbstractController
                         'phone' => $phone,
                         'message' => $message
                         ];
+            $message = (new \Swift_Message('Заявка на бронирование'))
+                ->setFrom('nick.whatsoever@gmail.com')
+                ->setTo('nick.whatsoever@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        // templates/emails/registration.html.twig
+                        'emails/booking.html.twig',
+                        array(
+                            'name' => $name,
+                            'offer' => $offer,
+                            'number' => $number,
+                            'date' => $date,
+                            'begin' => $begin,
+                            'end' => $end,
+                            'phone' => $phone,
+                            'message' => $message
+                        )
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
             return new JsonResponse($arrData);
         }
         
@@ -178,7 +177,7 @@ class MainController extends AbstractController
     /**
      * @Route("/event-form", name="event-form", methods={"POST"})
      */
-    public function eventForm(Request $request)
+    public function eventForm(Request $request, \Swift_Mailer $mailer)
     {
         if($request->getMethod() == 'POST'){
             $name = $request->request->get('form-name');
@@ -196,6 +195,26 @@ class MainController extends AbstractController
                         'phone' => $phone,
                         'message' => $message
                         ];
+            $message = (new \Swift_Message('Заявка на бронирование события'))
+                ->setFrom('nick.whatsoever@gmail.com')
+                ->setTo('nick.whatsoever@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        'emails/booking-event.html.twig',
+                        array(
+                            'name' => $name,
+                            'event' => $event,
+                            'number' => $number,
+                            'date' => $date,
+                            'begin' => $begin,
+                            'phone' => $phone,
+                            'message' => $message
+                        )
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
             return new JsonResponse($arrData);
         }
         

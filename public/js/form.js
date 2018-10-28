@@ -25,16 +25,36 @@ $('#booking').submit(function(e) {
         $('#modal-form-wrapper').css('opacity', '0');
         $("#modal-form-wrapper").css('transform', 'translateY(-200%)');
         $("#modal-card").css('transform', 'translateX(-200%)');
+        $("#modal-notification").css('opacity', '1');
+        $("#modal-notification").css('display', 'flex');
+        setTimeout(function(){
+            $("#modal-notification").css('opacity', '0');
+        },3000);
+        setTimeout(function(){
+            $("#modal-notification").css('display', 'none');
+        },3300);
     }, 'JSON');
 });
 
 $('#event-booking').submit(function(e) {
+    $("#preloader-bg").addClass("preloader-active");
+    $(".pong-loader").addClass("preloader-active");
     e.preventDefault();
     var url = "/event-form";
     var formSerialize = $(this).serialize();
     $.post(url, formSerialize, function(response) {
+        $("#preloader-bg").removeClass("preloader-active");
+        $(".pong-loader").removeClass("preloader-active");
         $('#modal-form-wrapper').css('opacity', '0');
         $("#modal-form-wrapper").css('transform', 'translateY(-200%)');
+        $("#modal-notification").css('opacity', '1');
+        $("#modal-notification").css('display', 'flex');
+        setTimeout(function(){
+            $("#modal-notification").css('opacity', '0');
+        },3000);
+        setTimeout(function(){
+            $("#modal-notification").css('display', 'none');
+        },3300);
     }, 'JSON');
 });
 

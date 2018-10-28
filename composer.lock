@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "68fbce5c2edf2816094d555108534ca7",
+    "content-hash": "a78b6522ac615be0a88186832c0042fc",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -5020,16 +5020,16 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v3.2.3",
+            "version": "v3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "7bd5de67552ee3f7e04df89d662d41eba346dc83"
+                "reference": "bd47db86d0b8415f6317c2be149bbacfab11a9cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/7bd5de67552ee3f7e04df89d662d41eba346dc83",
-                "reference": "7bd5de67552ee3f7e04df89d662d41eba346dc83",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/bd47db86d0b8415f6317c2be149bbacfab11a9cf",
+                "reference": "bd47db86d0b8415f6317c2be149bbacfab11a9cf",
                 "shasum": ""
             },
             "require": {
@@ -5078,7 +5078,7 @@
             ],
             "description": "Symfony SwiftmailerBundle",
             "homepage": "http://symfony.com",
-            "time": "2018-08-29T08:49:17+00:00"
+            "time": "2018-10-27T16:17:38+00:00"
         },
         {
             "name": "symfony/templating",

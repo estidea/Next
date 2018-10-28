@@ -553,3 +553,28 @@ input {
 .contact-item {
   margin-top: 6px;
 }
+
+#modal-notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32vw;
+    height: 11vh;
+    border-radius: 6px;
+    font-size: 18px;
+    background-color: #0000009e;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-family: 'Ubuntu Light';
+    color: white;
+    padding: 24px;
+    transform: translate(-50%, -50%);
+    opacity:0;
+    display: none;
+    -webkit-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+    min-height: 100px;
+    min-width: 240px;
+}

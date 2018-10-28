@@ -289,6 +289,11 @@ body {
 }
 
 #modal-btn {
+  font-family: 'Akrobat';
+  font-weight: 600;
+  line-height: 24px;
+  font-size: 18px;
+  color: #FFFFFF;
   width: 162px;
   height: 42px;
   background: -webkit-linear-gradient(14.98deg, #1D8989 2.89%, #14999C 100%);
@@ -336,6 +341,31 @@ body {
   padding: 6px 0;
   font-size: 12px;
   line-height: normal;
+}
+
+#modal-notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32vw;
+    height: 11vh;
+    border-radius: 6px;
+    font-size: 18px;
+    background-color: #0000009e;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-family: 'Ubuntu Light';
+    color: white;
+    padding: 24px;
+    transform: translate(-50%, -50%);
+    opacity:0;
+    display: none;
+    -webkit-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+    min-height: 100px;
+    min-width: 240px;
 }
 
 #main-svg {
