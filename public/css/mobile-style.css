@@ -582,7 +582,5 @@ input {
 }
 
 @supports (-webkit-overflow-scrolling: touch) {
-  #modal-form-wrapper {
-    top: 26px !important;
-  }
+
 }
