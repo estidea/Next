@@ -17,6 +17,13 @@
   src: local('Akrobat ExtraLight'), url('../fonts/Akrobat-ExtraLight.woff') format('woff');
 }
 
+html {
+  background: -webkit-gradient(linear, left top, left bottom, from(#010D0F), to(#01191C));
+  background: -webkit-linear-gradient(top, #010D0F 0%, #01191C 100%);
+  background: -o-linear-gradient(top, #010D0F 0%, #01191C 100%);
+  background: linear-gradient(180deg, #010D0F 0%, #01191C 100%);
+}
+
 html, body {
   height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
@@ -40,15 +47,11 @@ body {
   display:-webkit-box;
   display:-ms-flexbox;
   display:flex;
-  background: -webkit-gradient(linear, left top, left bottom, from(#010D0F), to(#01191C));
-  background: -webkit-linear-gradient(top, #010D0F 0%, #01191C 100%);
-  background: -o-linear-gradient(top, #010D0F 0%, #01191C 100%);
-  background: linear-gradient(180deg, #010D0F 0%, #01191C 100%);
+  
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  overflow: scroll;
-  -webkit-overflow-scrolling:touch;
+  overflow: auto;
 }
 
 #left-side {
@@ -345,20 +348,13 @@ input {
   width:100%;
 }
 
-input, textarea, select{
-  -webkit-appearance: none;
-} 
-
 #modal-form {
   padding: 18px;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
+  overflow: auto;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  -webkit-overflow-scrolling:touch;
-  top: -70px;
-  padding-bottom: 70px;
-  transform: translateY(70px);
 }
 
 #modal-form-wrapper {

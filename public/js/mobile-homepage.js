@@ -22,9 +22,9 @@ function showModal(id) {
 };
 
 function getDescription(id) {
-    $("#preloader-bg").addClass("preloader-active");
-    $(".pong-loader").addClass("preloader-active");
 	if (id != window.previous) {
+        $("#preloader-bg").addClass("preloader-active");
+        $(".pong-loader").addClass("preloader-active");
 		$("#modal-card").css('transform', 'translateX(-200%)');
 		var project_id = $(this).data('id');
     	that = $(this);
