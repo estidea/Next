@@ -23,4 +23,6 @@ return [
     Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
     SunCat\MobileDetectBundle\MobileDetectBundle::class => ['all' => true],
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
+    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
+    Sonata\UserBundle\SonataUserBundle::class => ['all' => true],
 ];
