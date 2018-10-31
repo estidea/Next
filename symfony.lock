@@ -167,20 +167,11 @@
     "sonata-project/datagrid-bundle": {
         "version": "2.3.1"
     },
-    "sonata-project/doctrine-extensions": {
-        "version": "1.1.0"
-    },
     "sonata-project/doctrine-orm-admin-bundle": {
         "version": "3.6.2"
     },
-    "sonata-project/easy-extends-bundle": {
-        "version": "2.5.0"
-    },
     "sonata-project/exporter": {
         "version": "1.9.1"
-    },
-    "sonata-project/user-bundle": {
-        "version": "4.2.3"
     },
     "suncat/mobile-detect-bundle": {
         "version": "1.0",
