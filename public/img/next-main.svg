@@ -27,8 +27,8 @@
       .unhovered {
         opacity:0 !important;
         transition: all .25s ease;
-        transform: translateY(2px);
-        -moz-transform: translateY(2px);
+        transform: translateY(4px);
+        -moz-transform: translateY(4px);
       }
       .cls-1 {
         fill: #2d2d2d;
