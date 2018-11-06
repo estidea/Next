@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 jQuery(function($){
-   $("#form-phone").mask("+38(999) 999-9999");
+   $("#form-phone").mask("+38(099) 999-9999");
 });
 
 $('#booking').submit(function(e) {

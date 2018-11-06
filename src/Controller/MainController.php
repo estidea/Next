@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Offers;
 use App\Entity\Category;
+use App\Entity\Contacts;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,7 +116,11 @@ class MainController extends AbstractController
      */
     public function contacts()
     {
+        $em = $this->getDoctrine()->getManager();
+        $contacts = $em->getRepository(Contacts::class)
+            ->findAll();
         return $this->render('main/contacts.html.twig', [
+            'contacts' => $contacts
         ]);
     }
 

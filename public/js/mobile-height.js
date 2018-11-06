@@ -6,8 +6,11 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 document.documentElement.style.height = window.innerHeight + 'px';
 
 window.addEventListener('resize', () => {
-  // We execute the same script as before
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-  document.documentElement.style.height = window.innerHeight + 'px';
+  
+	if(($(document.activeElement).prop('type') === 'text') || ($(document.activeElement).prop('type') === 'tel') || ($(document.activeElement).prop('type') === 'textarea') || ($(document.activeElement).prop('type') === 'number')) {
+	} else {
+    	let vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+		document.documentElement.style.height = window.innerHeight + 'px';
+	}
 });

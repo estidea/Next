@@ -398,9 +398,6 @@ input {
   transition: all .3s ease;
   border: none;
   cursor: pointer;
-}
-
-#modal-btn a{
   font-family: 'Akrobat ExtraLight';
   font-weight: 600;
   line-height: 24px;
@@ -601,6 +598,10 @@ input {
   .main-container {
     margin-top: 60px;
     height: calc(100vh - 60px);
+  }
+
+  #offers li {
+    height: 10vw;
   }
 
   #offers li a {
