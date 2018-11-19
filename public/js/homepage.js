@@ -103,6 +103,13 @@ function activeSvg(svg) { // clicks on the items on the svg
 			if (window.previous != '') {
 				shutActive(svg, window.previous);
 				window.previous = '';
+				/* Hide the modal */
+				$('#modal-card').css('opacity', '0');
+			    $("#modal-card").css('transform', 'translateX(-150%)');
+			    window.current = '';
+			    setTimeout (function(){
+			    	$('#modal-card').css('opacity', '1');
+			    }, 200); 
 			}
 		}
 	});
@@ -170,9 +177,8 @@ function getDescription(id) {
             async: true,
             success: function (data)
             {
-            	$("#preloader-bg").removeClass("preloader-active");
-			    $(".pong-loader").removeClass("preloader-active");
             	$("#modal-title").html(data.title);
+            	$("#modal-photo").css('background-image','url(..'+data.photo+')');
             	$("#modal-description").html(data.description);
             	$("#modal-price span").html(data.price);
             	$("#modal-additional").html(data.additional);
@@ -188,7 +194,12 @@ function getDescription(id) {
             	} else {
             		$("#modal-btn").css('display','none');
             	}
-				$("#modal-card").css('transform', 'translateX(0%)');
+				
+				setTimeout(function() {
+            		$("#preloader-bg").removeClass("preloader-active");
+			    	$(".pong-loader").removeClass("preloader-active");
+			    	$("#modal-card").css('transform', 'translateX(0%)');
+            	},50);
             }
         });
     return false;
