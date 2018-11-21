@@ -148,8 +148,8 @@ class MainController extends AbstractController
                         'message' => $message
                         ];
             $message = (new \Swift_Message('Заявка на бронирование'))
-                ->setFrom('nick.whatsoever@gmail.com')
-                ->setTo('nick.whatsoever@gmail.com')
+                ->setFrom('nextcreativespace@gmail.com')
+                ->setTo('nextcreativespace@gmail.com')
                 ->setBody(
                     $this->renderView(
                         // templates/emails/registration.html.twig
@@ -198,8 +198,8 @@ class MainController extends AbstractController
                         'message' => $message
                         ];
             $message = (new \Swift_Message('Заявка на бронирование события'))
-                ->setFrom('nick.whatsoever@gmail.com')
-                ->setTo('nick.whatsoever@gmail.com')
+                ->setFrom('nextcreativespace@gmail.com')
+                ->setTo('nextcreativespace@gmail.com')
                 ->setBody(
                     $this->renderView(
                         'emails/booking-event.html.twig',
