@@ -39,6 +39,10 @@ a,p,span,h1,h2,h3,h4,h5,h6,li {
   font-size: 12px;
 }
 
+button:focus {
+  outline: none;
+}
+
 body {
   margin: 0;
   background: -webkit-linear-gradient(23.84deg, #000000 13.83%, #002F35 114.59%);
@@ -529,9 +533,10 @@ body {
   content: "\1f860";
   font-weight: 400;
   font-size: 75%;
-  top: 3px;
-  position: relative;
+/*  top: 3px;*/
+  /*position: relative;*/
   padding-right: 5px;
+  padding-top: 2px;
 }
 
 .fc-icon-left-single-arrow::after {
@@ -547,8 +552,9 @@ body {
   font-weight: 400;
   font-size: 75%;
   top: 3px;
-  position: relative;
+  position: initial;
   padding-left: 5px;
+  padding-top: 2px;
 }
 
 .fc-toolbar.fc-header-toolbar {
