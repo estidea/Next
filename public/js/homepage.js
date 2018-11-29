@@ -178,7 +178,7 @@ function getDescription(id) {
             success: function (data)
             {
             	$("#modal-title").html(data.title);
-            	$("#modal-photo").css('background-image','url(..'+data.photo+')');
+            	$("#modal-photo").css('background-image','url(../img/'+data.photo+')');
             	$("#modal-description").html(data.description);
             	$("#modal-price span").html(data.price);
             	$("#modal-additional").html(data.additional);

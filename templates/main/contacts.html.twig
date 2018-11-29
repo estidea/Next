@@ -31,7 +31,7 @@
     <div id="left-contacts">
         {% for contact in contacts %}
         <div class="contact-item">
-            <small>{{contact.name}}</small><br>{{contact.value}}
+            <small>{{contact.name}}</small><br>{{contact.value|raw}}
         </div>
         {% endfor %}
     </div>
