@@ -91,6 +91,13 @@ function customizeCalendar() {
 
 
 $(document).ready(function() {
+	if (checkedCategory != "") {
+		categories = [checkedCategory];
+		var checkboxes = $("input:checkbox");
+    	checkboxes.removeAttr('checked');
+    	$("input:checkbox[id=Мафия]").prop( "checked", true );
+	}
+
     runCaledar(categories);
 
     $.when( runCaledar ).done(function () {
@@ -107,6 +114,7 @@ $(document).ready(function() {
 				if ( ~position ) categories.splice(position, 1);
             	
             }
+
             $('#calendar').fullCalendar( 'refetchEvents' );
         }); 
 });
@@ -115,4 +123,3 @@ window.onresize = function(event) {
 	var height = $('#desktop-center').height();
 	$('#calendar').fullCalendar('option', 'contentHeight', height);
 };
-

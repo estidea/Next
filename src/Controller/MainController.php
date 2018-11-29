@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Offers;
 use App\Entity\Category;
 use App\Entity\Contacts;
+use App\Entity\BookingOffers;
+use App\Entity\BookingEvents;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -101,16 +103,19 @@ class MainController extends AbstractController
     /**
      * @Route("/calendar", name="calendar")
      */
-    public function calendar()
+    public function calendar(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $checked_category = $request->query->get('category');
         $categories = $em->getRepository(Category::class)
-            ->findBy(
-                array(),
-                array('title' => 'ASC')
+                ->findBy(
+                    array(),
+                    array('title' => 'ASC')
             );
+       
         return $this->render('main/calendar.html.twig', [
-            'categories' => $categories
+            'categories' => $categories,
+            'checked_category' => $checked_category
         ]);
     }
 
@@ -141,6 +146,22 @@ class MainController extends AbstractController
             $end = $request->request->get('form-end');
             $phone = $request->request->get('form-phone');
             $message = $request->request->get('form-message');
+            
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $bookingOffer = new BookingOffers();
+            $bookingOffer->setOffer($offer);
+            $bookingOffer->setNumber($number);
+            $bookingOffer->setDate($date);
+            $bookingOffer->setBeginAt($begin);
+            $bookingOffer->setEndAt($end);
+            $bookingOffer->setPhone($phone);
+            $bookingOffer->setMessage($message);
+            $bookingOffer->setName($name);
+
+            $entityManager->persist($bookingOffer);
+            $entityManager->flush();
+
             $arrData = ['name' => $name,
                         'offer' => $offer,
                         'number' => $number,
@@ -192,6 +213,20 @@ class MainController extends AbstractController
             $begin = $request->request->get('form-begin');
             $phone = $request->request->get('form-phone');
             $message = $request->request->get('form-message');
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $bookingEvent = new BookingEvents();
+            $bookingEvent->setEvent($event);
+            $bookingEvent->setNumber($number);
+            $bookingEvent->setDate($date);
+            $bookingEvent->setBeginAt($begin);
+            $bookingEvent->setPhone($phone);
+            $bookingEvent->setMessage($message);
+            $bookingEvent->setName($name);
+
+            $entityManager->persist($bookingEvent);
+            $entityManager->flush();
+
             $arrData = ['name' => $name,
                         'event' => $event,
                         'number' => $number,

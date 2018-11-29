@@ -96,6 +96,10 @@
         </div>
     </div>
 </div>
+<!-- Modal form end -->
+    <div id="modal-notification">
+        Вы успешно отправили заявку на участие в событии! Ожидайте звонка для подтверждения участия.
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -107,6 +111,7 @@
         {% for category in categories %}
             categories.push('{{category.title}}');
         {% endfor %}
+    var checkedCategory = '{{ checked_category }}';
     </script>
     
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
