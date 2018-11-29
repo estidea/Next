@@ -24,8 +24,14 @@ function runCaledar(filter) {
 		    $("#event-title").html(event.title);
 		    $("#event-description").html(event.description);
 		    $("#event-date").html(event.start.format('Do MMMM, dddd'));
-		    $("#event-begin").html(event.start.format('H:mm'));
-		    $("#event-end").html(event.end.format('H:mm'));
+
+		    // $("#event-begin").html(event.start.format('H:mm'));
+		    // $("#event-end").html(event.end.format('H:mm'));
+		    if (event.end.format('H:mm') == '23:59') {
+		    	$("#event-time").html('C '+event.start.format('H:mm'));
+		    } else {
+		    	$("#event-time").html(event.start.format('H:mm')+'-'+event.end.format('H:mm'));
+		    }
 	    },
 	    eventAfterAllRender: function() {
 			$("#preloader-bg").removeClass("preloader-active");
