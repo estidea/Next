@@ -105,7 +105,10 @@ class MainController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository(Category::class)
-            ->findAll();
+            ->findBy(
+                array(),
+                array('title' => 'ASC')
+            );
         return $this->render('main/calendar.html.twig', [
             'categories' => $categories
         ]);

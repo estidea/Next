@@ -8,6 +8,7 @@
 {% block title %}Календарь{% endblock %}
 
 {% block body %}
+
 <div id="left-side" class="left-side-calendar">
     <div id="static">
         {% if is_mobile() %}
@@ -106,7 +107,6 @@
         {% for category in categories %}
             categories.push('{{category.title}}');
         {% endfor %}
-
     </script>
     
     <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
