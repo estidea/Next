@@ -1,4 +1,4 @@
-#modal-form-wrapper {
+#modal-form-wrapper{
 	position:absolute;
 	top:0;
 	left:0;
@@ -22,7 +22,33 @@
 	        transform: translateY(-200%);
 }
 
-#modal-form {
+#modal-consoles-wrapper {
+	position:absolute;
+	top:0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	background-color:rgba(0, 0, 0, 0.6);
+	display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	font-style: 'Ubuntu';
+	z-index: 10;
+}
+
+.booking-container {
+	display: flex;
+	width: 80vw;
+	flex-direction: column;
+}
+
+#modal-form, .booking-container {
 	background-color:#FDFFFC;
 	min-height: 517px;
 	border-right: solid #279B9B 6px;

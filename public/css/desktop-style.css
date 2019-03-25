@@ -45,9 +45,9 @@ button:focus {
 
 body {
   margin: 0;
-  background: -webkit-linear-gradient(23.84deg, #000000 13.83%, #002F35 114.59%);
-  background: -o-linear-gradient(23.84deg, #000000 13.83%, #002F35 114.59%);
-  background: linear-gradient(66.16deg, #000000 13.83%, #002F35 114.59%);
+  background: -webkit-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+  background: -o-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+  background: linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
   background-size: cover;
   background-position: center;
   display:-webkit-box;
@@ -60,23 +60,6 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   overflow: hidden;
-}
-
-#logo-bg {
-  width: 90vw;
-  height: 100%;
-  position: fixed;
-  z-index: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-#logo-bg img {
-  width: 100%;
 }
 
 .main-container {
@@ -705,3 +688,32 @@ body {
     width: 42vw;
   }
 }
+
+
+
+/* Booking-picker customization */
+.booking-consoles {
+  background-color: #00B6BA;
+}
+
+/* ::-webkit-scrollbar{
+    width:4px;
+}
+
+::-webkit-scrollbar-thumb{
+    border-width:1px 1px 1px 2px;
+    border-color: rgba(0,0,0,.8);
+    background-color: rgba(0,0,0,.8);
+    border-radius:4px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    border-width: 1px 1px 1px 2px;
+    border-color: rgba(0,0,0,1);
+    background-color: rgba(0,0,0,1);
+}
+
+::-webkit-scrollbar-track{
+    border-width:0;
+    background-color: rgba(255,255,255,.1);
+} */

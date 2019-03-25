@@ -22,7 +22,7 @@
             <a href="{{ path('home') }}"><img id="logo" src="{{ asset('img/logo-desktop.svg') }}"></a>
         {% endif %}
         <ul id="menu">
-            <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
+            <li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Главная</a></li>
             <li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
             <li class="menu-item {{ app.request.get('_route') == 'contacts' ? 'active' }}"><a href="{{ path('contacts') }}">Контакты</a></li>
         </ul>

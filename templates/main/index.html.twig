@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Бронирование{% endblock %}
+{% block title %}Главная{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link href="{{ asset('css/timetablejs.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/timetable-widget.css') }}" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
 	<div id="left-side">
@@ -14,7 +20,7 @@
             {% endif %}
 			
 			<ul id="menu">
-				<li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Бронирование</a></li>
+				<li class="menu-item {{ app.request.get('_route') == 'home' ? 'active' }}"><a href="{{ path('home') }}">Главная</a></li>
 				<li class="menu-item {{ app.request.get('_route') == 'calendar' ? 'active' }}"><a href="{{ path('calendar') }}">Календарь</a></li>
                 <li class="menu-item {{ app.request.get('_route') == 'contacts' ? 'active' }}"><a href="{{ path('contacts') }}">Контакты</a></li>
 			</ul>
@@ -144,6 +150,36 @@
         </div>
     </div>
     <!-- Modal form end -->
+    
+    <!-- Modal form for consoles begin -->
+    <div id="modal-consoles-wrapper">
+        <div class="booking-container">
+            <div class="modal-close" id="modal-consoles-close">
+                <img src="{{ asset('img/close.svg') }}">
+            </div>
+            <div class="timetable"></div>
+            <div id="booking-form">
+            <form id="book-event-form" class="uk-form">
+                <div class="form-group">
+                    <label for="form-category">Что бронируем</label>
+                        <select name="form-category" id="form-category">
+                            <option value="Xbox-360">Xbox-360</option>
+                            <option value="Sony PS">Sony PS</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="form-time-begin">От</label>
+                    <input id="form-time-begin" name="form-time-begin" type="time" value="09:00" min="9:00" max="23:00" step="900">
+                </div>
+                <div class="form-group">
+                    <label for="form-time-end">До</label>
+                    <input id="form-time-end" name="form-time-end" type="time" value="10:00" min="9:00" max="23:00" step="900">
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal form for consoles end -->
     <div id="modal-notification">
         Вы успешно отправили заявку на бронирование! Ожидайте звонка для подтверждения бронирования.
     </div>
@@ -156,6 +192,15 @@
     {% else %}
         <script src="{{ asset('js/homepage.js') }}"></script>
     {% endif %}
-	
+	<script>
+        var offers = [];
+            {% for offer in offers %}
+                offers.push('{{offer.title}}');
+            {% endfor %}
+        </script>
+        <script type="text/javascript" src="{{ asset('js/timetable.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/scroll-to.min.js') }}"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="{{ asset('js/booking.js') }}"></script>
    
 {% endblock %}
