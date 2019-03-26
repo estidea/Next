@@ -85,27 +85,29 @@
             <div class="modal-close" id="modal-form-close">
                 <img src="{{ asset('img/close.svg') }}">
             </div>
-            <div id="form-title">Бронирование</div>
-            <div id="form-body">
-
+            <div class="timetable"></div>
+            <div id="booking-form">
                 <form id="booking" class="uk-form">
-
                     <div class="form-column">
                         <div class="form-group">
-                            <label for="name">Имя</label>
-                            <input name="form-name" id="form-name" type="text" required>
+                            <label for="begin">Дата бронирования</label>
+                            <input name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
                         </div>
                         <div class="form-group">
-                            <label for="form-offer">Что бронируем</label>
-                                <select name="form-offer" id="form-offer">
-                                	{% for offer in offers %}
-                                		{% if (offer.button == true) and (offer.href == '')  %}
-										<option value="{{offer.slug}}">{{offer.title}}</option>
-										{% endif %}
-								    {% endfor %}
+                            <label for="form-category">Что бронируем</label>
+                                <select name="form-category" id="form-category">
+                                    <option value="Xbox-360">Xbox-360</option>
+                                    <option value="Sony PS">Sony PS</option>
                                 </select>
                         </div>
-
+                        <div class="form-group">
+                            <label for="form-time-begin">От</label>
+                            <input id="form-time-begin" name="form-time-begin" type="time" value="09:00" min="9:00" max="23:00" step="900">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-time-end">До</label>
+                            <input id="form-time-end" name="form-time-end" type="time" value="10:00" min="9:00" max="23:00" step="900">
+                        </div>
                         <div class="form-group">
                             <label for="number">Количество человек</label>
                             <input name="form-number" id="form-number" type="number" min="1" value="1" required>
@@ -113,29 +115,13 @@
                     </div>
                     <div class="form-column">
                         <div class="form-group">
-                            <label for="begin">Дата бронирования</label>
-                            <input name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
-                            
-                        </div>
-                        <div class="form-group form-time">
-                            <label for="begin">Начало</label>
-                            <input name="form-begin" data-uk-timepicker="start:11" type="text" id="form-begin" required value="11:00" />
-                            
-                        </div>
-                        <div class="form-group form-time">
-                            <label for="end">Конец</label>
-                            <input name="form-end" data-uk-timepicker="start:11" type="text" id="form-end" required value="11:00"/>
-                            
+                            <label for="name">Имя</label>
+                            <input name="form-name" id="form-name" type="text" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Телефон*</label>
                             <input name="form-phone" id="form-phone" type="tel" required>
                         </div>
-                    </div>
-                    <div class="form-group form-wide">
-                        <label for="message">Комментарий к заказу (не обязательно)</label>
-                        <textarea name="form-message" id="form-message" type="textarea" rows="1" placeholder=""></textarea>
-                        
                     </div>
                     <div class="form-wide form-action">
                         <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
@@ -151,35 +137,7 @@
     </div>
     <!-- Modal form end -->
     
-    <!-- Modal form for consoles begin -->
-    <div id="modal-consoles-wrapper">
-        <div class="booking-container">
-            <div class="modal-close" id="modal-consoles-close">
-                <img src="{{ asset('img/close.svg') }}">
-            </div>
-            <div class="timetable"></div>
-            <div id="booking-form">
-            <form id="book-event-form" class="uk-form">
-                <div class="form-group">
-                    <label for="form-category">Что бронируем</label>
-                        <select name="form-category" id="form-category">
-                            <option value="Xbox-360">Xbox-360</option>
-                            <option value="Sony PS">Sony PS</option>
-                        </select>
-                </div>
-                <div class="form-group">
-                    <label for="form-time-begin">От</label>
-                    <input id="form-time-begin" name="form-time-begin" type="time" value="09:00" min="9:00" max="23:00" step="900">
-                </div>
-                <div class="form-group">
-                    <label for="form-time-end">До</label>
-                    <input id="form-time-end" name="form-time-end" type="time" value="10:00" min="9:00" max="23:00" step="900">
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal form for consoles end -->
+    
     <div id="modal-notification">
         Вы успешно отправили заявку на бронирование! Ожидайте звонка для подтверждения бронирования.
     </div>

@@ -1,17 +1,17 @@
 var workingHours = [10,23];
-var consoles = ['Xbox-360','Sony PS'];
+var bookingItems = ['Xbox-360','Sony PS'];
 console.log(offers);
 var events = [
   {
     'name': 'Vasya',
-    'console': 'Xbox-360',
+    'bookingItem': 'Xbox-360',
     'beginAt': new Date(2015,7,17,10,30),
     'endAt': new Date(2015,7,17,11,30),
-    'options': { class: 'booking-consoles' }
+    'options': { class: 'booking-bookingItems' }
   },
   {
     'name': 'Kolya',
-    'console': 'Sony PS',
+    'bookingItem': 'Sony PS',
     'beginAt': new Date(2015,7,17,12),
     'endAt': new Date(2015,7,17,13),
     'options': ''
@@ -36,11 +36,11 @@ function init() {
 
   timetable.setScope(workingHours[0],workingHours[1]);
 
-  timetable.addLocations(consoles);
+  timetable.addLocations(bookingItems);
   for (var i = 0; i<events.length; i++){
     timetable.addEvent(
       events[i].name,
-      events[i].console,
+      events[i].bookingItem,
       events[i].beginAt,
       events[i].endAt,
       events[i].options,
@@ -111,26 +111,23 @@ function drawForm(bookingTimeBegin, bookingItem, bookingTimeEnd) {
     if(events[i].name=='new booking') {
       continue;
     }
-    if(bookingItem==events[i].console) {
+    if(bookingItem==events[i].bookingItem) {
       var bookedItemDateBegin = events[i].beginAt,
           bookedItemDateEnd = events[i].endAt;
       // 1) когда начало попадает в занятый диапазон
       if(timeDateBegin>bookedItemDateBegin && timeDateBegin<bookedItemDateEnd) {
-        console.log('1 case - in begin');
         timeDateBegin = bookedItemDateEnd;
         hoursBegin = timeDateBegin.getHours();
         minutesBegin = timeDateBegin.getMinutes();
       }
       // 2) когда конец попадает в занятый диапазон
       if(timeDateEnd>bookedItemDateBegin && timeDateEnd<bookedItemDateEnd) {
-        console.log('2 case - in end');
         timeDateEnd = bookedItemDateBegin;
         hoursEnd = timeDateEnd.getHours();
         minutesEnd = timeDateEnd.getMinutes();
       }
       // 3) когда бронь перекрывает занятый диапазон
       if(timeDateBegin<bookedItemDateBegin && timeDateEnd>=bookedItemDateEnd) {
-        console.log('3 case - overlay');
         timeDateEnd = bookedItemDateBegin;
         hoursEnd = timeDateEnd.getHours();
         minutesEnd = timeDateEnd.getMinutes();
@@ -142,7 +139,7 @@ function drawForm(bookingTimeBegin, bookingItem, bookingTimeEnd) {
   events.push(
     {
     'name': 'new booking',
-    'console': bookingItem,
+    'bookingItem': bookingItem,
     'beginAt': timeDateBegin,
     'endAt': timeDateEnd,
     'options': { class: 'vip-only' }

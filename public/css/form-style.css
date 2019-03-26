@@ -48,12 +48,13 @@
 	flex-direction: column;
 }
 
-#modal-form, .booking-container {
+#modal-form{
 	background-color:#FDFFFC;
 	min-height: 517px;
 	border-right: solid #279B9B 6px;
 	position: relative;
 	padding: 72px;
+	width: 80vw;
 }
 
 #modal-form h3, #modal-form h3 span, #modal-form p, #modal-form p span {

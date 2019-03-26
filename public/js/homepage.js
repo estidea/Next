@@ -46,10 +46,6 @@ function showModal(id) {
 		/* Add this element to the current (for the future) */
 		window.previous = id;
 	}; 
-
-	// if (window.previous != '') {
-	// 	shutActive(svg, window.previous);
-	// }
 };
 
 function fireActive(svg, id) {
@@ -156,8 +152,13 @@ window.addEventListener("load", function() {
 	setTimeout(function() {
 		$("#preloader-bg").toggleClass("preloader-active");
 	    $(".pong-loader").toggleClass("preloader-active");
-	    $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
-	},2000);
+		$("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');	
+	},500);
+	/* Open the modal with consoles first */
+	var consolesOffer = document.getElementById('consoles-offer').parentElement;
+	var event = new Event("click");
+	consolesOffer.dispatchEvent(event);
+	console.log(event);
 });
 
 function getDescription(id) {
