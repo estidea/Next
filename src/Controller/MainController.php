@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Offers;
+use App\Entity\Bookings;
+use App\Entity\BookingItems;
 use App\Entity\Category;
 use App\Entity\Contacts;
-use App\Entity\BookingOffers;
-use App\Entity\BookingEvents;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +23,44 @@ class MainController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository(Offers::class)
             ->findAll();
+        
+        $booking_items = $em->getRepository(BookingItems::class)
+            ->findAll();
 
         return $this->render('main/index.html.twig', [
-            'offers' => $offers
+            'offers' => $offers,
+            'booking_items' => $booking_items
         ]);
+    }
+
+    /**
+     * @Route("/getbooking", name="getbooking", methods={"GET","POST"})
+     */
+    public function getbooking(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->request->get('booking_date')){
+            $js_booking_date = $request->request->get('booking_date');
+            $js_booking_date = substr($js_booking_date, 0, strpos($js_booking_date, '('));
+            $js_booking_date_TS = strtotime($js_booking_date);
+            if ($js_booking_date_TS !== false) 
+            {
+                $request_date = new \DateTime();
+                $php_date = $request_date->setTimestamp($js_booking_date_TS);
+            } 
+            else 
+            {
+                // invalid date format
+            }
+
+            $target_bookings = $em->getRepository(Bookings::class)->findBy(
+                ['date' => $php_date]
+            );
+            
+            return $this->json($target_bookings);
+        }
+        return $this->redirectToRoute('home');
     }
 
 	/**
@@ -139,54 +173,62 @@ class MainController extends AbstractController
     {
         if($request->getMethod() == 'POST'){
             $name = $request->request->get('form-name');
-            $offer = $request->request->get('form-offer');
+            $category_name = $request->request->get('form-category');
+            $category = $this->getDoctrine()->getRepository(BookingItems::class)->findOneBy(['title' => $category_name]);
             $number = $request->request->get('form-number');
-            $date = $request->request->get('form-date');
-            $begin = $request->request->get('form-begin');
-            $end = $request->request->get('form-end');
             $phone = $request->request->get('form-phone');
-            $message = $request->request->get('form-message');
+
+            $js_booking_date = strtotime($request->request->get('form-date'));
+            $request_date = new \DateTime();
+            $php_date = $request_date->setTimestamp($js_booking_date);
+
+            $js_booking_begin = strtotime($request->request->get('form-time-begin'));
+            $request_begin = new \DateTime();
+            $php_begin = $request_begin->setTimestamp($js_booking_begin);
+
+            $js_booking_end = strtotime($request->request->get('form-time-end'));
+            $request_end = new \DateTime();
+            $php_end = $request_end->setTimestamp($js_booking_end);
+
             
             $entityManager = $this->getDoctrine()->getManager();
 
-            $bookingOffer = new BookingOffers();
-            $bookingOffer->setOffer($offer);
-            $bookingOffer->setNumber($number);
-            $bookingOffer->setDate($date);
-            $bookingOffer->setBeginAt($begin);
-            $bookingOffer->setEndAt($end);
-            $bookingOffer->setPhone($phone);
-            $bookingOffer->setMessage($message);
-            $bookingOffer->setName($name);
+            $Booking = new Bookings();
+            $Booking->setBookingItem($category); 
+            $Booking->setNumber($number);
+            $Booking->setDate($php_date);
+            $Booking->setBeginAt($php_begin);
+            $Booking->setEndAt($php_end);
+            $Booking->setPhone($phone);
+            $Booking->setName($name);
 
-            $entityManager->persist($bookingOffer);
+            $entityManager->persist($Booking);
             $entityManager->flush();
 
             $arrData = ['name' => $name,
-                        'offer' => $offer,
+                        'category' => $category,
                         'number' => $number,
-                        'date' => $date,
-                        'begin' => $begin,
-                        'end' => $end,
-                        'phone' => $phone,
-                        'message' => $message
+                        'date' => $php_date,
+                        'begin' => $php_begin,
+                        'end' => $php_end,
+                        'phone' => $phone
                         ];
             $message = (new \Swift_Message('Заявка на бронирование'))
-                ->setFrom('nextcreativespace@gmail.com')
-                ->setTo('nextcreativespace@gmail.com')
+                ->setFrom('nick.whatsoever@gmail.com')
+                ->setTo('nick.whatsoever@gmail.com')
                 ->setBody(
                     $this->renderView(
+                        // nextcreativespace@gmail.com
                         // templates/emails/registration.html.twig
                         'emails/booking.html.twig',
                         array(
                             'name' => $name,
-                            'offer' => $offer,
+                            'category' => $category,
                             'number' => $number,
-                            'date' => $date,
-                            'begin' => $begin,
-                            'end' => $end,
-                            'phone' => $phone,
-                            'message' => $message
+                            'date' => $php_date,
+                            'begin' => $php_begin,
+                            'end' => $php_end,
+                            'phone' => $phone
                         )
                     ),
                     'text/html'
@@ -205,58 +247,58 @@ class MainController extends AbstractController
      */
     public function eventForm(Request $request, \Swift_Mailer $mailer)
     {
-        if($request->getMethod() == 'POST'){
-            $name = $request->request->get('form-name');
-            $event = $request->request->get('form-event');
-            $number = $request->request->get('form-number');
-            $date = $request->request->get('form-date');
-            $begin = $request->request->get('form-begin');
-            $phone = $request->request->get('form-phone');
-            $message = $request->request->get('form-message');
+        // if($request->getMethod() == 'POST'){
+        //     $name = $request->request->get('form-name');
+        //     $event = $request->request->get('form-event');
+        //     $number = $request->request->get('form-number');
+        //     $date = $request->request->get('form-date');
+        //     $begin = $request->request->get('form-begin');
+        //     $phone = $request->request->get('form-phone');
+        //     $message = $request->request->get('form-message');
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $bookingEvent = new BookingEvents();
-            $bookingEvent->setEvent($event);
-            $bookingEvent->setNumber($number);
-            $bookingEvent->setDate($date);
-            $bookingEvent->setBeginAt($begin);
-            $bookingEvent->setPhone($phone);
-            $bookingEvent->setMessage($message);
-            $bookingEvent->setName($name);
+        //     $entityManager = $this->getDoctrine()->getManager();
+        //     $bookingEvent = new BookingEvents();
+        //     $bookingEvent->setEvent($event);
+        //     $bookingEvent->setNumber($number);
+        //     $bookingEvent->setDate($date);
+        //     $bookingEvent->setBeginAt($begin);
+        //     $bookingEvent->setPhone($phone);
+        //     $bookingEvent->setMessage($message);
+        //     $bookingEvent->setName($name);
 
-            $entityManager->persist($bookingEvent);
-            $entityManager->flush();
+        //     $entityManager->persist($bookingEvent);
+        //     $entityManager->flush();
 
-            $arrData = ['name' => $name,
-                        'event' => $event,
-                        'number' => $number,
-                        'date' => $date,
-                        'begin' => $begin,
-                        'phone' => $phone,
-                        'message' => $message
-                        ];
-            $message = (new \Swift_Message('Заявка на бронирование события'))
-                ->setFrom('nextcreativespace@gmail.com')
-                ->setTo('nextcreativespace@gmail.com')
-                ->setBody(
-                    $this->renderView(
-                        'emails/booking-event.html.twig',
-                        array(
-                            'name' => $name,
-                            'event' => $event,
-                            'number' => $number,
-                            'date' => $date,
-                            'begin' => $begin,
-                            'phone' => $phone,
-                            'message' => $message
-                        )
-                    ),
-                    'text/html'
-                );
+        //     $arrData = ['name' => $name,
+        //                 'event' => $event,
+        //                 'number' => $number,
+        //                 'date' => $date,
+        //                 'begin' => $begin,
+        //                 'phone' => $phone,
+        //                 'message' => $message
+        //                 ];
+        //     $message = (new \Swift_Message('Заявка на бронирование события'))
+        //         ->setFrom('nextcreativespace@gmail.com')
+        //         ->setTo('nextcreativespace@gmail.com')
+        //         ->setBody(
+        //             $this->renderView(
+        //                 'emails/booking-event.html.twig',
+        //                 array(
+        //                     'name' => $name,
+        //                     'event' => $event,
+        //                     'number' => $number,
+        //                     'date' => $date,
+        //                     'begin' => $begin,
+        //                     'phone' => $phone,
+        //                     'message' => $message
+        //                 )
+        //             ),
+        //             'text/html'
+        //         );
 
-            $mailer->send($message);
-            return new JsonResponse($arrData);
-        }
+        //     $mailer->send($message);
+        //     return new JsonResponse($arrData);
+        // }
         
         // redirects to the "main" route
         return $this->redirectToRoute('home');

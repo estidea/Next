@@ -3,9 +3,9 @@
 {% block title %}Главная{% endblock %}
 
 {% block stylesheets %}
-    {{parent()}}
     <link href="{{ asset('css/timetablejs.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/timetable-widget.css') }}" rel="stylesheet" />
+    {{parent()}}
 {% endblock %}
 
 {% block body %}
@@ -47,7 +47,7 @@
 	</div>
 	<div id="desktop-center">
 		<object id="main-svg" type="image/svg+xml" data="{{ asset('img/next-main.svg') }}">Your browser does not support SVGs</object>
-	</div>
+    </div>
 	<div id="mobile-center">
 		<div id="mobile-center-top">
 			<img id="mobile-center-image" src="{{ asset('img/mobile/mafia.svg') }}">
@@ -77,7 +77,8 @@
             {% endif %}
 
 			
-		</ul>
+        </ul>
+        
 	</div>
     <!-- Modal form begin -->
 	<div id="modal-form-wrapper">
@@ -85,50 +86,51 @@
             <div class="modal-close" id="modal-form-close">
                 <img src="{{ asset('img/close.svg') }}">
             </div>
-            <div class="timetable"></div>
+            
             <div id="booking-form">
                 <form id="booking" class="uk-form">
-                    <div class="form-column">
-                        <div class="form-group">
-                            <label for="begin">Дата бронирования</label>
-                            <input name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
+                        <div class="form-column">
+                            <div class="form-group form-group-40">
+                                <label for="begin">Когда бронируем</label>
+                                <input class="full-width" name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
+                            </div>
                         </div>
-                        <div class="form-group">
+                    <div class="timetable"></div>
+                    <div class="form-column">
+                        <div class="form-group form-group-30">
                             <label for="form-category">Что бронируем</label>
-                                <select name="form-category" id="form-category">
-                                    <option value="Xbox-360">Xbox-360</option>
-                                    <option value="Sony PS">Sony PS</option>
+                                <select class="full-width" name="form-category" id="form-category">
+                                    {% for booking_item in booking_items %}
+                                        <option value="{{booking_item.title}}">{{booking_item.title}}</option>
+                                    {% endfor %}
                                 </select>
                         </div>
-                        <div class="form-group">
+                    
+                        <div class="form-group form-group-20" >
                             <label for="form-time-begin">От</label>
-                            <input id="form-time-begin" name="form-time-begin" type="time" value="09:00" min="9:00" max="23:00" step="900">
+                            <input class="full-width" id="form-time-begin" name="form-time-begin" type="time" value="10:00" min="10:00" max="23:00" step="900">
                         </div>
-                        <div class="form-group">
+                        
+                        <div class="form-group form-group-20">
                             <label for="form-time-end">До</label>
-                            <input id="form-time-end" name="form-time-end" type="time" value="10:00" min="9:00" max="23:00" step="900">
+                            <input class="full-width" id="form-time-end" name="form-time-end" type="time" value="11:00" min="10:00" max="23:00" step="900">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-30">
                             <label for="number">Количество человек</label>
-                            <input name="form-number" id="form-number" type="number" min="1" value="1" required>
+                            <input class="full-width" name="form-number" id="form-number" type="number" min="1" value="1" required>
                         </div>
-                    </div>
-                    <div class="form-column">
-                        <div class="form-group">
+                        <div class="form-group form-group-30">
                             <label for="name">Имя</label>
-                            <input name="form-name" id="form-name" type="text" required>
+                            <input class="full-width" name="form-name" id="form-name" type="text" required>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Телефон*</label>
-                            <input name="form-phone" id="form-phone" type="tel" required>
+                        <div class="form-group form-group-40">
+                            <label for="phone">Телефон</label>
+                            <input class="full-width" name="form-phone" id="form-phone" type="tel" required>
                         </div>
-                    </div>
-                    <div class="form-wide form-action">
-                        <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
-                        <div class="form-btn">
-                            <button type="submit" id="modal-btn">
-                                Отправить
-                            </button>
+                        <div class="form-group form-group-30 form-group-btn">
+                                <button type="submit" id="modal-btn">
+                                    Отправить
+                                </button>
                         </div>
                     </div>
                 </form>
@@ -151,11 +153,19 @@
         <script src="{{ asset('js/homepage.js') }}"></script>
     {% endif %}
 	<script>
-        var offers = [];
-            {% for offer in offers %}
-                offers.push('{{offer.title}}');
-            {% endfor %}
+        var offers = [],
+            bookingItems = [];
+
+        {% for offer in offers %}
+            offers.push('{{offer.title}}');
+        {% endfor %}
+
+        {% for booking_item in booking_items %}
+            bookingItems.push('{{booking_item.title}}');
+        {% endfor %}
+         
         </script>
+
         <script type="text/javascript" src="{{ asset('js/timetable.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/scroll-to.min.js') }}"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

@@ -58,16 +58,18 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Contacts }
         public: true
 
-    admin.booking_offers:
-        class: App\Admin\BookingOffersAdmin
-        arguments: [~, App\Entity\BookingOffers, ~]
+    admin.boookings:
+        class: App\Admin\BookingsAdmin
+        arguments: [~, App\Entity\Bookings, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: BookingOffers }
+            - { name: sonata.admin, manager_type: orm, label: Bookings }
         public: true
 
-    admin.bookings:
-        class: App\Admin\BookingEventsAdmin
-        arguments: [~, App\Entity\BookingEvents, ~]
+    admin.booking_items:
+        class: App\Admin\BookingItemsAdmin
+        arguments: [~, App\Entity\BookingItems, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: BookingEvents }
+            - { name: sonata.admin, manager_type: orm, label: BookingItems }
         public: true
+
+

@@ -158,7 +158,6 @@ window.addEventListener("load", function() {
 	var consolesOffer = document.getElementById('consoles-offer').parentElement;
 	var event = new Event("click");
 	consolesOffer.dispatchEvent(event);
-	console.log(event);
 });
 
 function getDescription(id) {

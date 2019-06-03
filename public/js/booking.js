@@ -1,55 +1,74 @@
 var workingHours = [10,23];
-var bookingItems = ['Xbox-360','Sony PS'];
-console.log(offers);
-var events = [
-  {
-    'name': 'Vasya',
-    'bookingItem': 'Xbox-360',
-    'beginAt': new Date(2015,7,17,10,30),
-    'endAt': new Date(2015,7,17,11,30),
-    'options': { class: 'booking-bookingItems' }
-  },
-  {
-    'name': 'Kolya',
-    'bookingItem': 'Sony PS',
-    'beginAt': new Date(2015,7,17,12),
-    'endAt': new Date(2015,7,17,13),
-    'options': ''
-  },
-];
+var bookings = [];
+var currentDate = new Date(); // first value for current date = today
 
-// window.addEventListener("load", function() {
-//   setTimeout(function() {
-//     $("#preloader-bg").toggleClass("preloader-active");
-//       $(".pong-loader").toggleClass("preloader-active");
-//       $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
-//   },200);
-// });
+getFirstBookings();
 
 var formTimeBegin = $('#form-time-begin'),
-  formTimeEnd = $('#form-time-end');
-  formCategory = $('#form-category');
+  formTimeEnd = $('#form-time-end'),
+  formCategory = $('#form-category'),
+  formDate = $('#form-date');
+  
 
+function getBookings(bookingDate) {
+  $("#preloader-bg").addClass("preloader-active");
+  $(".pong-loader").addClass("preloader-active");
+  $.ajax({
+      url:'/getbooking',
+      type: "POST",
+      dataType: "json",
+      data: {
+          "booking_date": bookingDate
+      },
+      async: true,
+      success: function (data)
+      {
+        $("#preloader-bg").removeClass("preloader-active");
+        $(".pong-loader").removeClass("preloader-active");
+        bookings = [];
+        for(var i=0;i<data.length;i++) {
+          bookings.push({
+            'name': '',
+            'bookingItem': data[i].bookingItem.title,
+            'beginAt': new Date(data[i].beginAt),
+            'endAt': new Date(data[i].endAt),
+            'options': { class: data[i].bookingItem.className}
+          });
+        }
+        
+        init();
+      }
+  });
+  return false;
+}
+
+function getFirstBookings() {
+  var day = ("0" + currentDate.getDate()).slice(-2);
+  var month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+  var today = (day)+"."+ (month)+"."+currentDate.getFullYear();
+  $('#form-date').val(today);
+  getBookings(currentDate);
+}
 
 function init() {
+  
   var timetable = new Timetable();
 
   timetable.setScope(workingHours[0],workingHours[1]);
-
   timetable.addLocations(bookingItems);
-  for (var i = 0; i<events.length; i++){
+  for (var i = 0; i<bookings.length; i++){
     timetable.addEvent(
-      events[i].name,
-      events[i].bookingItem,
-      events[i].beginAt,
-      events[i].endAt,
-      events[i].options,
+      bookings[i].name,
+      bookings[i].bookingItem,
+      bookings[i].beginAt,
+      bookings[i].endAt,
+      bookings[i].options,
     );
   };
 
   var renderer = new Timetable.Renderer(timetable);
   renderer.draw('.timetable');
-  var target = $('span[title="new booking"]');
+  var target = $('span[title="Новая бронь"]');
   if (target.length>0) {
     $('time').scrollTo(target);
     var leftTarget = parseInt(target.css("left"));
@@ -74,10 +93,61 @@ function init() {
       var quarter = $(this).width()/hours/4;
       var bookingTimeBegin = Math.floor(e.offsetX/quarter);
       // Добавляем новую бронь на поле
-      var hoursBegin = workingHours[0] + Math.floor(bookingTimeBegin/4);
-      var minutesBegin = bookingTimeBegin%4*15;
-      var strTimeBegin = hoursBegin + ':' + minutesBegin;
-      drawForm(strTimeBegin, bookingItem);
+      var hoursBeginClicked = workingHours[0] + Math.floor(bookingTimeBegin/4); // 13
+      var minutesBeginClicked = bookingTimeBegin%4*15; // 15
+      var strTimeBegin = hoursBeginClicked + ':' + minutesBeginClicked; // 13:15
+
+      // Смотрим на формочку. Фиксируем разницу во времени между началом и окончанием брони
+      
+      var bookingTimeEnd = formTimeEnd.val(); // 12:30
+      var timeEnd = bookingTimeEnd.split(':');
+      var hoursEnd = +timeEnd[0]; // 12
+      var minutesEnd = +timeEnd[1]; // 30
+
+      var bookingTimeBeginLast = formTimeBegin.val(); // 11:45
+      var timeBeginLast = bookingTimeBeginLast.split(':');
+      var hoursBeginLast = +timeBeginLast[0]; // 11
+      var minutesBeginLast = +timeBeginLast[1]; // 45
+
+      
+      // Проверка на первое нажатие
+      if (hoursEnd == 11 && minutesEnd == 0) {
+        hoursEnd = hoursBeginClicked + 1;
+      } else {
+        var diffHours = hoursEnd - hoursBeginLast; // 12 - 11 = 1
+        var diffMinutes = minutesEnd - minutesBeginLast; // 30 - 45 = -15
+        console.log(diffHours, ':',diffMinutes);
+        if (diffMinutes<0) {
+          hoursEnd = hoursBeginClicked + diffHours - 1; // 13 + 1 - 1
+          minutesEnd = minutesBeginClicked + Math.abs(diffMinutes+60); // 15 + -15 + 60 = 60
+          if (minutesEnd>=60) {
+            minutesEnd = Math.abs(minutesEnd-60); // 60-60 = 0
+            hoursEnd++; // 13 + 1 = 14
+          }
+        }
+        // else if (diffMinutes>=60) {
+        //   hoursEnd = hoursBeginClicked + diffHours + 1;
+        //   minutesEnd = Math.abs(diffMinutes-60);
+        // }
+        else {
+          hoursEnd = hoursBeginClicked + diffHours; // 12 + 1 = 13
+          minutesEnd = minutesBeginClicked + diffMinutes;
+          if (minutesEnd>=60) {
+            minutesEnd = Math.abs(minutesEnd-60);
+            hoursEnd++;
+          }
+        }
+        
+        if (hoursEnd >=23) {
+          hoursEnd = 23;
+          minutesEnd = '00';
+        } 
+      }
+
+      console.log(hoursEnd, ':', minutesEnd);
+    
+      var strTimeEnd = hoursEnd + ':' + minutesEnd;
+      drawForm(strTimeBegin, bookingItem, strTimeEnd);
     }
   });
 }
@@ -85,6 +155,7 @@ function init() {
 init();
 
 function drawForm(bookingTimeBegin, bookingItem, bookingTimeEnd) {
+  
   timeBegin = bookingTimeBegin.split(':')
   hoursBegin = +timeBegin[0]; // 9
   minutesBegin = +timeBegin[1]; // 
@@ -92,28 +163,30 @@ function drawForm(bookingTimeBegin, bookingItem, bookingTimeEnd) {
 
   var hoursEnd, minutesEnd;
 
-  if (bookingTimeEnd == undefined ){
-    hoursEnd = hoursBegin + 1;
-    minutesEnd = minutesBegin;
-  } else {
-    timeEnd = bookingTimeEnd.split(':')
-    hoursEnd = +timeEnd[0];
-    minutesEnd = +timeEnd[1];
-  }
+  
+  timeEnd = bookingTimeEnd.split(':')
+  hoursEnd = +timeEnd[0];
+  minutesEnd = +timeEnd[1];
+  
   if(hoursBegin<9) hoursBegin = 9;
   if(hoursEnd<=9) {hoursEnd = 9; minutesEnd = 15;}
   if(hoursBegin>=23) {hoursBegin = 22; minutesBegin = 30}
   if(hoursEnd>=23 && minutesEnd>0) {hoursEnd = 23; minutesEnd = 0}
 
-  var timeDateBegin = new Date(2015,7,17,hoursBegin,minutesBegin);
-  var timeDateEnd = new Date(2015,7,17,hoursEnd,minutesEnd);
-  for (var i = 0; i<events.length; i++){
-    if(events[i].name=='new booking') {
+  var currentYear = currentDate.getFullYear();
+  var currentMonth = currentDate.getMonth();
+  var currentDay = currentDate.getDate();
+
+  var timeDateBegin = new Date(currentYear,currentMonth,currentDay,hoursBegin,minutesBegin);
+  var timeDateEnd = new Date(currentYear,currentMonth,currentDay,hoursEnd,minutesEnd);
+
+  for (var i = 0; i<bookings.length; i++){
+    if(bookings[i].name=='Новая бронь') {
       continue;
     }
-    if(bookingItem==events[i].bookingItem) {
-      var bookedItemDateBegin = events[i].beginAt,
-          bookedItemDateEnd = events[i].endAt;
+    if(bookingItem==bookings[i].bookingItem) {
+      var bookedItemDateBegin = bookings[i].beginAt,
+          bookedItemDateEnd = bookings[i].endAt;
       // 1) когда начало попадает в занятый диапазон
       if(timeDateBegin>bookedItemDateBegin && timeDateBegin<bookedItemDateEnd) {
         timeDateBegin = bookedItemDateEnd;
@@ -135,16 +208,19 @@ function drawForm(bookingTimeBegin, bookingItem, bookingTimeEnd) {
     }
   }
   // Проверяем, есть ли на поле бронь ивента, если есть, то уничтожаем
-  if (events[events.length-1].name == 'new booking') events.splice(-1,1)
-  events.push(
+  if(bookings[bookings.length-1]) {
+    if (bookings[bookings.length-1].name == 'Новая бронь') bookings.splice(-1,1)
+  }
+  bookings.push(
     {
-    'name': 'new booking',
+    'name': 'Новая бронь',
     'bookingItem': bookingItem,
     'beginAt': timeDateBegin,
     'endAt': timeDateEnd,
     'options': { class: 'vip-only' }
     }
   );
+  
   if(hoursBegin.toString().length<2) hoursBegin = '0'+hoursBegin.toString();
   if(minutesBegin.toString().length<2) minutesBegin = '0'+minutesBegin.toString();
   if(hoursEnd.toString().length<2) hoursEnd = '0'+hoursEnd.toString();
@@ -174,7 +250,22 @@ function change() {
   drawForm(bookingTimeBegin, bookingItem, bookingTimeEnd);
 }
 
+// Смена даты
+formDate.on('change',changeDate);
+
+function changeDate() {
+  var dateFromForm = $('#form-date').val();
+  var yearFromForm = dateFromForm.slice(6,10);
+  var monthFromForm = dateFromForm.slice(3,5);
+  var dayFromForm = dateFromForm.slice(0,2);
+
+  currentDate = new Date(yearFromForm, monthFromForm-1, dayFromForm, 00, 00, 0, 0);
+  getBookings(currentDate);
+}
+
 // остановился на том, что клацать событие можно в любой точке поля
 // DONE если событие цепляет кого-то из забронированных, его время корректируется
 // 2) Как-то сделать так, чтобы не приходилось кликать в пустом месте для анфокуса с инпута тайм
 // 3) Убрать проверку на попадание в себя самого
+
+// 4) Когда меняешь дату, то новая бронь не отображается в списке (очищается букингс)
