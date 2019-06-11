@@ -23,6 +23,7 @@ function getBookings(bookingDate) {
       async: true,
       success: function (data)
       {
+        console.log('bookings\'ve got');
         $("#preloader-bg").removeClass("preloader-active");
         $(".pong-loader").removeClass("preloader-active");
         bookings = [];

@@ -181,6 +181,7 @@ function getDescription(id) {
             async: true,
             success: function (data)
             {
+				console.log('description\'ve got');
             	$("#modal-title").html(data.title);
             	$("#modal-photo").css('background-image','url(../img/'+data.photo+')');
             	$("#modal-description").html(data.description);
@@ -204,7 +205,12 @@ function getDescription(id) {
 			    	$(".pong-loader").removeClass("preloader-active");
 			    	$("#modal-card").css('transform', 'translateX(0%)');
             	},50);
-            }
+			},
+			error: function() {
+				console.log('description\'ve not been got');
+				$("#preloader-bg").removeClass("preloader-active");
+				$(".pong-loader").removeClass("preloader-active");
+			}
         });
     return false;
 	}
