@@ -4,11 +4,11 @@ var items = ['mafia','tennis','koworking','board','birthday','consoles','barka',
 
 window.addEventListener("load", function() {
     $('#mafia-offer').toggleClass('active');
-    setTimeout(function() {
-        $("#preloader-bg").toggleClass("preloader-active");
-        $(".pong-loader").toggleClass("preloader-active");
-        $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
-    },1000);
+    // setTimeout(function() {
+    //     $("#preloader-bg").toggleClass("preloader-active");
+    //     $(".pong-loader").toggleClass("preloader-active");
+    //     $("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');
+    // },1000);
 });
 
 function showModal(id) {
