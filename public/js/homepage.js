@@ -149,11 +149,6 @@ window.addEventListener("load", function() {
 	for (var i=0;i<8;i++) {
 		lightHover(items[i], mainsvg);
 	}
-	setTimeout(function() {
-		$("#preloader-bg").toggleClass("preloader-active");
-	    $(".pong-loader").toggleClass("preloader-active");
-		$("#preloader-bg").css('background-color','rgba(0, 0, 0, .5)');	
-	},500);
 	/* Open the modal with consoles first */
 	var consolesOffer = document.getElementById('consoles-offer').parentElement;
 	var event = new Event("click");

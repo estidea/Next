@@ -1,4 +1,4 @@
-/*var workingHours = [10,23];
+var workingHours = [10,23];
 var bookings = [];
 var currentDate = new Date(); // first value for current date = today
 
