@@ -37,6 +37,10 @@ function getBookings(bookingDate) {
         }
         
         init();
+      },
+      error: function() {
+        $("#preloader-bg").removeClass("preloader-active");
+        $(".pong-loader").removeClass("preloader-active");
       }
   });
   return false;

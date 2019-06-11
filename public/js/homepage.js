@@ -1,5 +1,5 @@
 var previous = '';
-var current ='';
+var current ='consoles';
 
 var items = ['mafia','tennis','koworking','board','birthday','consoles','barka','vip'];
 
@@ -158,6 +158,10 @@ window.addEventListener("load", function() {
 	var consolesOffer = document.getElementById('consoles-offer').parentElement;
 	var event = new Event("click");
 	consolesOffer.dispatchEvent(event);
+	var lightness = mainsvg.getElementById('consoles-light');
+	lightness.classList.toggle("hovered");
+	lightness.classList.toggle("unhovered");
+
 });
 
 function getDescription(id) {
