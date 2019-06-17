@@ -166,7 +166,7 @@ class Bookings
         return $this->booked_at;
     }
 
-    public function setBookedAt(\DateTimeInterface $booked_at): ?\DateTimeInterface
+    public function setBookedAt(\DateTimeInterface $booked_at): self
     {
         $this->booked_at = $booked_at;
 
