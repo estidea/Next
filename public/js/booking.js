@@ -1,7 +1,7 @@
 var workingHours = [10,23];
 var bookings = [];
 var currentDate = new Date(); // first value for current date = today
-
+console.log(current);
 getFirstBookings();
 
 var formTimeBegin = $('#form-time-begin'),
@@ -23,7 +23,6 @@ function getBookings(bookingDate) {
       async: true,
       success: function (data)
       {
-        console.log('bookings\'ve got');
         $("#preloader-bg").removeClass("preloader-active");
         $(".pong-loader").removeClass("preloader-active");
         bookings = [];
