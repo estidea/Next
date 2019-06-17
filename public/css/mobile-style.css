@@ -25,6 +25,12 @@ body {
   background-position: center;
 }
 
+html {
+  background: -webkit-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+  background: -o-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+  background: linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+}
+
 html, body {
   height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);

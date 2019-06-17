@@ -43,13 +43,17 @@ button:focus {
   outline: none;
 }
 
+html {
+    background: -webkit-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+    background: -o-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+    background: linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
+}
+
 body {
   margin: 0;
   background: -webkit-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
   background: -o-linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
   background: linear-gradient(165.42deg, #181818 15.08%, #000000 90.75%);
-  background-size: cover;
-  background-position: center;
   display:-webkit-box;
   display:-ms-flexbox;
   display:flex;

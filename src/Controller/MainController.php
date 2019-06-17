@@ -214,8 +214,8 @@ class MainController extends AbstractController
                         'phone' => $phone
                         ];
             $message = (new \Swift_Message('Заявка на бронирование'))
-                ->setFrom('nick.whatsoever@gmail.com')
-                ->setTo('nick.whatsoever@gmail.com')
+                ->setFrom('nextcreativespace@gmail.com')
+                ->setTo('nextcreativespace@gmail.com')
                 ->setBody(
                     $this->renderView(
                         // nextcreativespace@gmail.com
