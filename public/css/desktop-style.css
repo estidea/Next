@@ -245,7 +245,7 @@ body {
 #modal-info p{
   font-family: Calibri;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.3;
   font-size: 14px;
   color: #000000;
@@ -281,7 +281,7 @@ body {
 }
 
 #modal-btn {
-  font-family: 'Akrobat';
+  font-family: 'Akrobat Regular';
   font-weight: 600;
   line-height: 24px;
   font-size: 18px;
@@ -322,15 +322,19 @@ body {
 }
 
 #modal-btn a{
-  font-family: 'Akrobat';
+  font-family: 'Akrobat Regular';
   font-weight: 600;
   line-height: 24px;
   font-size: 18px;
   color: #FFFFFF;
 }
 
+#modal-btn a:hover{
+  text-decoration: none;
+}
+
 #modal-additional {
-  padding: 6px 0;
+  padding: 6px 0 12px;
   font-size: 12px;
   line-height: normal;
 }
@@ -695,9 +699,9 @@ body {
 }
 
 /* Booking-picker customization */
-.booking-consoles {
-  background-color: #00B6BA !important;
-  border: 1px solid #00B6BA !important;
+.timetable .time-entry {
+  border: 1px solid #ec6a5e !important;
+  background-color: #ec6a5e !important;
 }
 
 /* .timetable {
