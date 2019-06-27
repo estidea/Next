@@ -84,7 +84,7 @@
 }
 
 .form-column {
-	width:50%;
+	width:100%;
 	margin-right: 5%;
 	-ms-flex-wrap: wrap;
 	    flex-wrap: wrap;
@@ -209,3 +209,19 @@
 	width:100%;
   }
 
+
+  /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .form-column {
+		width:50%;
+	}
+}
+
+@media (min-width: 993px) and (max-width: 1050px) {
+
+}
+  

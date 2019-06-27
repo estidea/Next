@@ -700,8 +700,8 @@ body {
 
 /* Booking-picker customization */
 .timetable .time-entry {
-  border: 1px solid #ec6a5e !important;
-  background-color: #ec6a5e !important;
+  border: 1px solid #ec6a5e;
+  background-color: #ec6a5e;
 }
 
 /* .timetable {
@@ -730,3 +730,4 @@ body {
     border-width:0;
     background-color: rgba(255,255,255,.1);
 } */
+

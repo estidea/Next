@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Админка{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/timetablejs.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/timetable-widget.css') }}" rel="stylesheet" />
+    {{parent()}}
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<div id="booking-form">
+    <form id="booking" class="uk-form">
+            <div class="form-column">
+                <div class="form-group form-group-40">
+                    <label for="begin">Дата бронирования</label>
+                    <input class="full-width" name="form-date" data-uk-datepicker="{format:'DD.MM.YYYY', i18n:{ months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], weekdays:['Вс','Пн','Вт','Ср','Чт','Пт','Сб'] }}" type="text" id="form-date" required />
+                </div>
+            </div>
+        <div class="timetable"></div>
+        <div class="form-column">
+            <div class="form-group form-group-30">
+                <label for="form-category">Что забронировано</label>
+                    <select class="full-width" name="form-category" id="form-category">
+                        {% for booking_item in booking_items %}
+                            <option value="{{booking_item.title}}">{{booking_item.title}}</option>
+                        {% endfor %}
+                    </select>
+            </div>
+        
+            <div class="form-group form-group-20" >
+                <label for="form-time-begin">От</label>
+                <input class="full-width" id="form-time-begin" name="form-time-begin" type="time" value="10:00" min="10:00" max="23:00" step="900">
+            </div>
+            
+            <div class="form-group form-group-20">
+                <label for="form-time-end">До</label>
+                <input class="full-width" id="form-time-end" name="form-time-end" type="time" value="11:00" min="10:00" max="23:00" step="900">
+            </div>
+            <div class="form-group form-group-30">
+                <label for="number">Количество человек</label>
+                <input class="full-width" name="form-number" id="form-number" type="number" min="1" value="1" required>
+            </div>
+            <div class="form-group form-group-30">
+                <label for="name">Имя</label>
+                <input class="full-width" name="form-name" id="form-name" type="text" required>
+            </div>
+            <div class="form-group form-group-40">
+                <label for="phone">Телефон</label>
+                <input class="full-width" name="form-phone" id="form-phone" type="tel" required>
+            </div>
+            <div class="form-group form-group-30 form-group-btn">
+                <button type="submit" id="modal-btn">
+                    Редактировать
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{parent()}}
+	<script>
+        var bookingItems = [];
+
+        {% for booking_item in booking_items %}
+            bookingItems.push('{{booking_item.title}}');
+        {% endfor %}
+         
+        </script>
+
+        <script type="text/javascript" src="{{ asset('js/timetable.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/scroll-to.min.js') }}"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="{{ asset('js/booking-admin.js') }}"></script>
+   
+{% endblock %}
