@@ -176,14 +176,15 @@ function getDescription(id) {
             async: true,
             success: function (data)
             {
-				console.log('description\'ve got');
             	$("#modal-title").html(data.title);
             	$("#modal-photo").css('background-image','url(../img/'+data.photo+')');
             	$("#modal-description").html(data.description);
             	$("#modal-price span").html(data.price);
             	$("#modal-additional").html(data.additional);
             	$("#modal-btn a").attr("id", data.slug);
-            	$("#modal-btn").css('display','flex');
+				$("#modal-btn").css('display','flex');
+				if (data.slug == 'tennis' || data.slug == 'vip') $('#form-category').val(data.title);
+				if (data.slug == 'consoles') $('#form-category')[0].selectedIndex = 0;
             	if (data.button == true) {
             		if (data.href != '') {
             			$("#modal-btn a").attr("href", data.href);

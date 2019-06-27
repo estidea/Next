@@ -16,7 +16,7 @@ function getBookings(bookingDate) {
   $("#preloader-bg").addClass("preloader-active");
   $(".pong-loader").addClass("preloader-active");
   $.ajax({
-      url:'/getbooking',
+      url:'/getadminbooking',
       type: "POST",
       dataType: "json",
       data: {

@@ -31,4 +31,36 @@ class AdminController extends AbstractController
             'booking_items' => $booking_items
         ]);
     }
+
+    /**
+     * @Route("/getadminbooking", name="getadminbooking", methods={"GET","POST"})
+     */
+    public function getadminbooking(Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $em = $this->getDoctrine()->getManager();
+
+        if($request->request->get('booking_date')){
+            $js_booking_date = $request->request->get('booking_date');
+            $js_booking_date = substr($js_booking_date, 0, strpos($js_booking_date, '('));
+            $js_booking_date_TS = strtotime($js_booking_date);
+            if ($js_booking_date_TS !== false) 
+            {
+                $request_date = new \DateTime();
+                $php_date = $request_date->setTimestamp($js_booking_date_TS);
+            } 
+            else 
+            {
+                // invalid date format
+            }
+
+            $target_bookings = $em->getRepository(Bookings::class)->findBy(
+                ['date' => $php_date]
+            );
+            
+            return $this->json($target_bookings);
+        }
+        return $this->redirectToRoute('home');
+    }
+
 }

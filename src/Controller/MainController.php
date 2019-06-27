@@ -57,8 +57,17 @@ class MainController extends AbstractController
             $target_bookings = $em->getRepository(Bookings::class)->findBy(
                 ['date' => $php_date]
             );
+
+            $bookings = array();
+            foreach ($target_bookings as $target_booking) {
+                $filtered_booking = array();
+                $filtered_booking['bookingItem'] = $target_booking->getBookingItem();
+                $filtered_booking['beginAt'] = $target_booking->getBeginAt();
+                $filtered_booking['endAt'] = $target_booking->getEndAt();
+                array_push($bookings, $filtered_booking);
+            }
             
-            return $this->json($target_bookings);
+            return $this->json($bookings);
         }
         return $this->redirectToRoute('home');
     }
