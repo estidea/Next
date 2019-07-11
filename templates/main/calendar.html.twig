@@ -87,7 +87,7 @@
                 <div class="form-wide form-action">
                     <div class="form-detail">* для уточнения бронирования <br>наш администратор свяжется с вами.</div>
                     <div class="form-btn">
-                        <button type="submit" id="modal-btn">
+                        <button type="submit" id="modal-btn" class="btn">
                             <a href="#">Отправить</a>
                         </button>
                     </div>
@@ -105,7 +105,14 @@
 {% block javascripts %}
     
 
-	{{parent()}}
+    {{parent()}}
+    <script type="text/javascript" src="{{ asset('uikit/js/uikit.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/autocomplete.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/form-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/timepicker.min.js') }}"></script>
+    <script src="{{ asset('js/maskinput.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/form.js') }}"></script>
     <script>
     var categories = [];
         {% for category in categories %}

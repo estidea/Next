@@ -9,6 +9,7 @@ var formTimeBegin = $('#form-time-begin'),
   formDate = $('#form-date'),
   formName = $('#form-name'),
   formNumber = $('#form-number'),
+  formId = $('#form-id'),
   formPhone = $('#form-phone');
   
 
@@ -38,7 +39,8 @@ function getBookings(bookingDate) {
               class: data[i].bookingItem.className, 
               data: {
                 phone: data[i].phone,
-                number: data[i].number
+                number: data[i].number,
+                id: data[i].id
               },
               onClick: function(event, timetable, clickEvent) {
                 var hoursBegin = event.startDate.getHours();
@@ -54,6 +56,7 @@ function getBookings(bookingDate) {
                 formNumber.val(event.options.data.number);
                 formPhone.val(event.options.data.phone);
                 formName.val(event.name);
+                formId.val(event.options.data.id);
               }
             }
           });

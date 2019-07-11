@@ -10,9 +10,13 @@ html, body {
 body {
     background:white;
     overflow-y: scroll;
+    align-items: flex-start;
 }
 
 .timetable .time-entry {
-    cursor: pointer;
-  }
-  
+  cursor: pointer;
+}
+
+.main-container {
+  padding:24px;
+}

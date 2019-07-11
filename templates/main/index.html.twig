@@ -37,7 +37,7 @@
 				</div>
 				<div id="modal-action">
 					<div id="modal-price"><span></span></div>
-					<div id="modal-btn">
+					<div id="modal-btn" class="btn">
 						<a href="#">Забронировать</a>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
                             <input class="full-width" name="form-phone" id="form-phone" type="tel" required>
                         </div>
                         <div class="form-group form-group-30 form-group-btn">
-                                <button type="submit" id="modal-btn">
+                                <button type="submit" id="modal-btn" class="btn">
                                     Отправить
                                 </button>
                         </div>
@@ -146,7 +146,14 @@
 {% endblock %}
 
 {% block javascripts %}
-	{{parent()}}
+    {{parent()}}
+    <script type="text/javascript" src="{{ asset('uikit/js/uikit.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/autocomplete.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/form-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/timepicker.min.js') }}"></script>
+    <script src="{{ asset('js/maskinput.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/form.js') }}"></script>
 	{% if is_mobile() %}
         <script src="{{ asset('js/mobile-homepage.js') }}"></script>
     {% else %}

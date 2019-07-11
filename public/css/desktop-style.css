@@ -280,7 +280,7 @@ body {
   color: #000000;
 }
 
-#modal-btn {
+.btn {
   font-family: 'Akrobat Regular';
   font-weight: 600;
   line-height: 24px;
@@ -309,19 +309,32 @@ body {
   cursor: pointer;
 }
 
-#modal-btn:hover {
+.btn-lined {
+  border:1px solid #14999C;
+  color: #14999C;
+  background:transparent;
+}
+
+.btn-danger {
+  background: linear-gradient(75.02deg, #F44336 2.89%, #FF5722 100%);
+}
+
+
+.btn:hover {
   background: -webkit-linear-gradient(14.98deg, #279B9B 2.89%, #1ABABD 100%);
   background: -o-linear-gradient(14.98deg, #279B9B 2.89%, #1ABABD 100%);
   background: linear-gradient(75.02deg, #279B9B 2.89%, #1ABABD 100%);
+  color:#FFFFFF;
 }
 
-#modal-btn:active {
+.btn:active {
   background: -webkit-linear-gradient(14.98deg, #00CCDB 2.89%, #00B6BA 100%);
   background: -o-linear-gradient(14.98deg, #00CCDB 2.89%, #00B6BA 100%);
   background: linear-gradient(75.02deg, #00CCDB 2.89%, #00B6BA 100%);
+  color:#FFFFFF;
 }
 
-#modal-btn a{
+.btn a{
   font-family: 'Akrobat Regular';
   font-weight: 600;
   line-height: 24px;
@@ -329,7 +342,12 @@ body {
   color: #FFFFFF;
 }
 
-#modal-btn a:hover{
+.btn-lined a{
+  color: #14999C;
+}
+
+
+.btn a:hover{
   text-decoration: none;
 }
 
@@ -340,29 +358,29 @@ body {
 }
 
 #modal-notification {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32vw;
-    height: 11vh;
-    border-radius: 6px;
-    font-size: 20px;
-    line-height: 1.4;
-    background-color: #000000c9;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    font-family: 'Calibri';
-    color: white;
-    padding: 24px;
-    transform: translate(-50%, -50%);
-    opacity:0;
-    display: none;
-    -webkit-transition: all .3s ease;
+  z-index:2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32vw;
+  height: 11vh;
+  border-radius: 6px;
+  font-size: 20px;
+  line-height: 1.4;
+  background-color: #000000c9;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: 'Calibri';
+  color: white;
+  padding: 24px;
+  transform: translate(-50%, -50%);
+  opacity:0;
+  display: none;
+  -webkit-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
-    min-height: 100px;
-    min-width: 240px;
+  min-width: 240px;
 }
 
 /* SVG flying effect */

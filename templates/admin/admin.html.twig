@@ -11,7 +11,7 @@
 
 {% block body %}
 <div id="booking-form">
-    <form id="booking" class="uk-form">
+    <form id="booking" class="uk-form" style="max-width: 1400px">
             <div class="form-column">
                 <div class="form-group form-group-40">
                     <label for="begin">Дата бронирования</label>
@@ -42,6 +42,7 @@
                 <label for="number">Количество человек</label>
                 <input class="full-width" name="form-number" id="form-number" type="number" min="1" value="1" required>
             </div>
+            <input name="form-id" id="form-id" type="text" hidden>
             <div class="form-group form-group-30">
                 <label for="name">Имя</label>
                 <input class="full-width" name="form-name" id="form-name" type="text" required>
@@ -51,18 +52,29 @@
                 <input class="full-width" name="form-phone" id="form-phone" type="tel" required>
             </div>
             <div class="form-group form-group-30 form-group-btn">
-                <button type="submit" id="modal-btn">
-                    Редактировать
+                <button type="submit" id="modal-btn" class="btn">
+                    Добавить новую
                 </button>
-            </div>
+            </div>    
         </div>
     </form>
+</div>
+
+<div id="modal-notification">
+    Новое бронирование успешно создано, вы великолепны.
 </div>
        
 {% endblock %}
 
 {% block javascripts %}
-	{{parent()}}
+    {{parent()}}
+    <script type="text/javascript" src="{{ asset('uikit/js/uikit.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/autocomplete.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/form-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('uikit/js/components/timepicker.min.js') }}"></script>
+    <script src="{{ asset('js/maskinput.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/form-admin.js') }}"></script>
 	<script>
         var bookingItems = [];
 
@@ -70,11 +82,11 @@
             bookingItems.push('{{booking_item.title}}');
         {% endfor %}
          
-        </script>
+    </script>
 
-        <script type="text/javascript" src="{{ asset('js/timetable.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/scroll-to.min.js') }}"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="{{ asset('js/booking-admin.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/timetable.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/scroll-to.min.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('js/booking-admin.js') }}"></script>
    
 {% endblock %}
